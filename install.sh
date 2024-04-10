@@ -12,7 +12,7 @@ sudo snap install intellij-idea-community
 sudo snap install --classic code
 sudo snap install postman
 sudo snap install dbeaver-ce
-
+sudo snap install drawio
 
 # DOCKER
 
