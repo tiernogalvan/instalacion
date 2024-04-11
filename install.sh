@@ -1,4 +1,13 @@
-#! /bin/bash
+#!/bin/bash
+#
+# This script should be run in a fresh installation of Ubuntu 22.04
+#
+
+die() { echo "$*" 1>&2 ; exit 1; }
+
+if [[ "$EUID" -ne 0 ]]; then
+  die "Please run as root"
+fi
 
 # Add Docker's official GPG key:
 apt-get update
