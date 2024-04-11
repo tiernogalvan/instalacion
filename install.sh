@@ -41,7 +41,9 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
 addgroup docker
-whoami | xargs -I % adduser % docker
+
+# This should be handled by LDAP
+# whoami | xargs -I % adduser % docker
 
 
 # CHROME
