@@ -2,7 +2,7 @@
 
 # Add Docker's official GPG key:
 apt-get update
-apt-get install ca-certificates curl wget gnupg git git-gui rar openjdk-21-jdk-headless maven net-tools openssl terminator virtualbox -y
+apt-get install ca-certificates curl wget gnupg git git-gui rar openjdk-21-jdk-headless maven net-tools openssl terminator virtualbox vim neovim ranger -y
 
 apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird -y
 
