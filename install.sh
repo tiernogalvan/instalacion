@@ -17,16 +17,6 @@ apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird -y
 
 apt upgrade -y
 
-snap install eclipse --classic
-snap install netbeans --classic
-snap install sublime-text --classic
-snap install android-studio --classic
-snap install intellij-idea-community --classic
-snap install dbeaver-ce
-snap install postman
-snap install drawio
-snap install --classic code
-
 # DOCKER
 
 install -m 0755 -d /etc/apt/keyrings
@@ -56,3 +46,15 @@ apt install ./google-chrome*.deb -y
 
 apt autoremove -y
 apt autoclean -y
+
+# SNAPS
+
+snap install eclipse --classic
+snap install netbeans --classic
+snap install sublime-text --classic
+snap install android-studio --classic
+snap install intellij-idea-community --classic
+snap install dbeaver-ce
+snap install postman
+snap install drawio
+snap install --classic code
