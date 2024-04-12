@@ -15,6 +15,8 @@ apt-get install ca-certificates curl wget gnupg git git-gui rar openjdk-21-jdk-h
 
 apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird -y
 
+apt upgrade -y
+
 snap install eclipse --classic
 snap install netbeans --classic
 snap install sublime-text --classic
@@ -52,3 +54,5 @@ apt install libxss1 libappindicator1 libindicator7 -y
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt install ./google-chrome*.deb -y
 
+apt autoremove -y
+apt autoclean -y
