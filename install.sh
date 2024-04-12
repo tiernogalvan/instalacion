@@ -1,4 +1,13 @@
-#! /bin/bash
+#!/bin/bash
+#
+# This script should be run in a fresh installation of Ubuntu 22.04
+#
+
+die() { echo "$*" 1>&2 ; exit 1; }
+
+if [[ "$EUID" -ne 0 ]]; then
+  die "Please run as root"
+fi
 
 # Add Docker's official GPG key:
 apt-get update
@@ -32,7 +41,9 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
 addgroup docker
-whoami | xargs -I % adduser % docker
+
+# This should be handled by LDAP
+# whoami | xargs -I % adduser % docker
 
 
 # CHROME
