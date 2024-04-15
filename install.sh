@@ -53,7 +53,7 @@ apt autoclean -y
 # SNAPS
 
 curl -sL http://172.20.0.21/v2/auth/store/assertions | sudo snap ack /dev/stdin
-snap set core proxy.store=2pfjybqDH1YbPXCoKsTUKDwRbFvFo6DA
+snap set core proxy.store=jEKSatomRZOrcmvRGlShFDdVCG0DZMnw
 
 snap install eclipse --classic
 snap install netbeans --classic
