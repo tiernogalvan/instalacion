@@ -9,6 +9,9 @@ if [[ "$EUID" -ne 0 ]]; then
   die "Please run as root"
 fi
 
+wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/01proxy.conf
+mv 01proxy.conf /etc/apt/apt.conf.d/
+
 # Add Docker's official GPG key:
 apt-get update
 apt-get install ca-certificates curl wget gnupg git git-gui rar openjdk-21-jdk-headless maven net-tools openssl terminator virtualbox vim neovim ranger -y
@@ -48,6 +51,9 @@ apt autoremove -y
 apt autoclean -y
 
 # SNAPS
+
+curl -sL http://172.20.0.21/v2/auth/store/assertions | sudo snap ack /dev/stdin
+snap set core proxy.store=2pfjybqDH1YbPXCoKsTUKDwRbFvFo6DA
 
 snap install eclipse --classic
 snap install netbeans --classic
