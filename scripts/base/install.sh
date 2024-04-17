@@ -10,7 +10,7 @@ if [[ "$EUID" -ne 0 ]]; then
 fi
 
 # wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/01proxy.conf
-mv 01proxy.conf /etc/apt/apt.conf.d/
+# mv 01proxy.conf /etc/apt/apt.conf.d/
 
 # Add Docker's official GPG key:
 apt-get update
@@ -20,10 +20,12 @@ apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird -y
 
 apt upgrade -y
 
+exit 
+
 # DOCKER
 
 install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
 chmod a+r /etc/apt/keyrings/docker.gpg
 
 # Add the repository to Apt sources:

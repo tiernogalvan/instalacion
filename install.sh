@@ -14,6 +14,7 @@ run_install() {
   popd
 }
 
+run_install apt
 run_install ssh
 run_install ldap
 run_install base
