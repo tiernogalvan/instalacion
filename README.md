@@ -7,8 +7,9 @@ Este repositorio contiene scripts de instalación de ordenadores de alumnos
 Ejecuta los siguientes comandos
 
 ```bash
-wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/install.sh
-chmod +x install.sh
+git clone https://github.com/tiernogalvan/instalacion.git
+cd instalacion
 sudo ./install.sh
-rm install.sh
+cd ..
+rm -r instalacion
 ```
