@@ -1,8 +1,6 @@
 #!/bin/bash
 
 apt-get install -y openssh-server
-install -o root -g root -m 0400 -d /root/.ssh/ authorized_keys
-echo 'PermitRootLogin prohibit-password' >> /etc/ssh/sshd_config
-echo 'PasswordAuthentication no' >> /etc/ssh/sshd_config
-echo 'PermitEmptyPasswords no' >> /etc/ssh/sshd_config
-
+install -o root -g root -m 0600 -D authorized_keys /root/.ssh/
+install -o root -g root -m 0600 -D sshd_tierno.conf /etc/ssh/sshd_config.d/
+systemctl restart sshd.service
