@@ -14,7 +14,7 @@ run_install() {
   popd
 }
 
-run_install base
 run_install ssh
 run_install ldap
+run_install base
 

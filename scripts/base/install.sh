@@ -9,7 +9,7 @@ if [[ "$EUID" -ne 0 ]]; then
   die "Please run as root"
 fi
 
-wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/01proxy.conf
+# wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/01proxy.conf
 mv 01proxy.conf /etc/apt/apt.conf.d/
 
 # Add Docker's official GPG key:
