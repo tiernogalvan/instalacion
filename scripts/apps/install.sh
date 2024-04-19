@@ -3,17 +3,9 @@
 # This script should be run in a fresh installation of Ubuntu 22.04
 #
 
-die() { echo "$*" 1>&2 ; exit 1; }
-
-if [[ "$EUID" -ne 0 ]]; then
-  die "Please run as root"
-fi
-
-apt-get install ca-certificates curl wget gnupg git git-gui rar openjdk-21-jdk-headless maven net-tools openssl terminator virtualbox vim neovim ranger -y
-
-apt remove aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird -y
-
-apt upgrade -y
+apt-get install -y openjdk-21-jdk-headless maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh
+apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
+apt-get upgrade -y
 
 
 # DOCKER
@@ -61,3 +53,5 @@ snap install dbeaver-ce
 snap install postman
 snap install drawio
 snap install --classic code
+snap install lsd
+snap install tldr
