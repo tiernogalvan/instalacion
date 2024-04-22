@@ -3,7 +3,7 @@
 # This script should be run in a fresh installation of Ubuntu 22.04
 #
 
-apt-get install -y openjdk-21-jdk-headless maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh
+apt-get install -y openjdk-21-jdk-headless maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh veyon-service
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
