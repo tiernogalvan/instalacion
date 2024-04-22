@@ -2,13 +2,22 @@
 
 Este repositorio contiene scripts de instalación de ordenadores de alumnos
 
-## install.sh
+## Instalación automática
 
-Ejecuta los siguientes comandos
+Para instalar ejecuta el siguiente comando:
 
 ```bash
-wget https://raw.githubusercontent.com/tiernogalvan/instalacion/main/install.sh
-chmod +x install.sh
-sudo ./install.sh
-rm install.sh
+wget -qO- https://instalacion.lan.tiernogalvan.es | sudo bash
+```
+
+
+## Instalación manual
+
+Si por algún motivo fallase el servidor `instalacion.lan.tiernogalvan.es`, puedes realizar los siguientes pasos:
+
+```
+$ sudo apt-get install -y git
+$ git clone https://github.com/tiernogalvan/instalacion.git
+$ cd instalacion
+$ sudo bash ./install.sh
 ```
