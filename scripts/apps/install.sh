@@ -3,7 +3,7 @@
 # This script should be run in a fresh installation of Ubuntu 22.04
 #
 
-apt-get install -y openjdk-21-jdk-headless maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh veyon-service
+apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh veyon-service
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
@@ -49,6 +49,7 @@ snap install netbeans --classic
 snap install sublime-text --classic
 snap install android-studio --classic
 snap install intellij-idea-community --classic
+snap install mysql-workbench-community
 snap install dbeaver-ce
 snap install postman
 snap install drawio
