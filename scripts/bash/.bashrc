@@ -1,14 +1,13 @@
-#  _____ _                          ____       _        __        
-# |_   _(_) ___ _ __ _ __   ___    / ___| __ _| |_   __/_/_ _ __  
-#   | | | |/ _ \ '__| '_ \ / _ \  | |  _ / _` | \ \ / / _` | '_ \ 
-#   | | | |  __/ |  | | | | (_) | | |_| | (_| | |\ V / (_| | | | |
-#   |_| |_|\___|_|  |_| |_|\___/   \____|\__,_|_| \_/ \__,_|_| |_|
+#  _   _                                   _                  
+# | |_(_) ___ _ __ _ __   ___   __ _  __ _| |_   ____ _ _ __  
+# | __| |/ _ \ '__| '_ \ / _ \ / _` |/ _` | \ \ / / _` | '_ \ 
+# | |_| |  __/ |  | | | | (_) | (_| | (_| | |\ V / (_| | | | |
+#  \__|_|\___|_|  |_| |_|\___/ \__, |\__,_|_| \_/ \__,_|_| |_|
+#                              |___/                          
 #
-#  IES Enrique Tierno Galván: .bashrc
+#  IES Enrique Tierno Galván
 #
 
-# IMPORTANTE: los usuarios diurno y vespertino tienen el GID compartido de `alumno`
-# Esto protege los ficheros de cada uno
 umask 077
 
 # If not running interactively, don't do anything
@@ -17,7 +16,7 @@ case $- in
       *) return;;
 esac
 
-# export PS1='\[\e[1;38;5;244m\]\t \[\e[1;35m\]\u\[\e[1;33m\]@\H \[\e[1;32m\]\w \[\e[1;32m\]\$ \[\e[0m\]'
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 export HISTFILESIZE=20000
 export HISTSIZE=10000
