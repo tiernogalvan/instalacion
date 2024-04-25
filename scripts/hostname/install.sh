@@ -6,7 +6,8 @@
 
 aula=""
 while [[ ! $aula ]]; do
-  read -p "Indica el aula (B15, B17, B21, B22...): " aula
+  # Forcing the read from tty allows this script to be run from a pipe
+  read -p "Indica el aula (B15, B17, B21, B22...): " aula < /dev/tty
   aula=$(echo $aula | tr '[:lower:]' '[:upper:]')
   [[ $aula =~ ^[0-9][0-9]$ ]] && aula="B$aula"
   case $aula in
@@ -14,7 +15,7 @@ while [[ ! $aula ]]; do
       ;;
     *)
       echo "El aula $aula no está entre las contempladas: B15, B17, B21, B22, B23, B24, B25, B27, B32"
-      read -p "¿Seguro que quieres usar ${aula}? (y/n): " confirm
+      read -p "¿Seguro que quieres usar ${aula}? (y/n): " confirm < /dev/tty
       if [[ $confirm != 'y' ]]; then
         aula=""
         echo
@@ -25,10 +26,10 @@ done
 
 puesto=""
 while [[ ! $puesto ]]; do
-  read -p "Indica el puesto (A1, A2... F3, F4): " puesto
+  read -p "Indica el puesto (A1, A2... F3, F4): " puesto < /dev/tty
   puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]')
   if [[ ! $puesto =~ ^[A-F][0-5]$ ]]; then
-      read -p "Puesto $aula no contemplado. ¿Seguro que quieres usar ese id? (y/n): " confirm
+      read -p "Puesto $aula no contemplado. ¿Seguro que quieres usar ese id? (y/n): " confirm < /dev/tty
       if [[ $confirm != 'y' ]]; then
         puesto=""
         echo
