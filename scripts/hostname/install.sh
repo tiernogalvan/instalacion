@@ -3,6 +3,7 @@
 # Establece el hostname.
 # Envía los datos al servidor junto a la MAC del equipo.
 #
+apt-get install -y curl
 
 aula=""
 while [[ ! $aula ]]; do
