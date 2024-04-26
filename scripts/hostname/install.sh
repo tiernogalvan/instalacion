@@ -3,7 +3,6 @@
 # Establece el hostname.
 # Envía los datos al servidor junto a la MAC del equipo.
 #
-apt-get install -y curl
 
 aula=""
 while [[ ! $aula ]]; do
@@ -46,5 +45,5 @@ hostnamectl hostname $hostname
 devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}')
 for dev in $devs ; do
   mac=$(cat /sys/class/net/${dev}/address)
-  curl "https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
+  wget -q "https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
 done
