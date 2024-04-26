@@ -13,7 +13,7 @@ wget -qO- https://instalacion.lan.tiernogalvan.es | sudo bash
 
 ## Instalación manual
 
-Si por algún motivo fallase el servidor `instalacion.lan.tiernogalvan.es`, puedes realizar los siguientes pasos:
+Si por fallase el comando anterior, puedes realizar la instalación con estos pasos:
 
 ```
 $ sudo apt-get install -y git
