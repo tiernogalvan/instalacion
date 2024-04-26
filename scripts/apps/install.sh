@@ -33,9 +33,15 @@ addgroup docker
 
 # CHROME
 
+# TODO: este apt install es necesario?
 apt install libxss1 libappindicator1 libindicator7 -y
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt install ./google-chrome*.deb -y
+chromegpg="/usr/share/keyrings/google-chrome.gpg"
+curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
+echo deb [arch=amd64 signed-by=${chromegpg}] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
+sudo apt install google-chrome-stable
+# wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# apt install ./google-chrome*.deb -y
 
 apt autoremove -y
 apt autoclean -y
