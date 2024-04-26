@@ -8,17 +8,6 @@ apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
 
-# PostgreSQL
-
-# Add the PostgreSQL repository to Apt sources:
-
-sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
-apt-get update
-
-apt-get install -y postgresql-client-16
-
 # DOCKER
 
 # Add Docker's official GPG key:
