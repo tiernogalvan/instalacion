@@ -36,7 +36,6 @@ while [[ ! $puesto ]]; do
       fi
   fi
 done
-exit
 
 hostname="${aula}-${puesto}"
 echo "Setting hostname $hostname"
