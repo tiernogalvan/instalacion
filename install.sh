@@ -21,12 +21,11 @@ echo "IES Enrique Tierno Galván"
 echo "Asistente de instalación de equipo."
 echo
 
-# Ejecuta la instalación desde el propio directorio
+rootpath="$(pwd)"
 run_install() {
-  pushd . >/dev/null
-  cd scripts/$1
+  # Use absolute path in case some script changed directory
+  cd ${rootpath}/scripts/$1
   bash ./install.sh
-  popd >/dev/null
 }
 
 run_install hostname  # Must be first
@@ -36,6 +35,7 @@ echo
 run_install apt
 run_install ssh
 run_install ldap
+run_install auth
 run_install bash
 run_install apps
 run_install containers

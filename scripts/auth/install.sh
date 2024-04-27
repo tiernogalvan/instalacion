@@ -9,7 +9,6 @@ ensure_line_in_file () {
   file="$1"
   line="$2"
   if [[ ! $(grep "$line" "$file") ]]; then
-    echo Not in file
     echo "$line" >> $file
   fi
 }
