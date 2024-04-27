@@ -29,7 +29,7 @@ while [[ ! $puesto ]]; do
   read -p "Indica el puesto (A1, A2... F3, F4): " puesto < /dev/tty
   puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]')
   if [[ ! $puesto =~ ^[A-F][0-5]$ ]]; then
-      read -p "Puesto $aula no contemplado. ¿Seguro que quieres usar ese id? (y/n): " confirm < /dev/tty
+      read -p "Puesto $puesto no contemplado. ¿Seguro que quieres usar ese id? (y/n): " confirm < /dev/tty
       if [[ $confirm != 'y' ]]; then
         puesto=""
         echo
