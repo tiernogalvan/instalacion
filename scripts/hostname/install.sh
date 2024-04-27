@@ -8,6 +8,7 @@ aula=""
 while [[ ! $aula ]]; do
   # Forcing the read from tty allows this script to be run from a pipe
   read -p "Indica el aula (B15, B17, B21, B22...): " aula < /dev/tty
+  [[ $aula ]] || continue
   aula=$(echo $aula | tr '[:lower:]' '[:upper:]')
   [[ $aula =~ ^[0-9][0-9]$ ]] && aula="B$aula"
   case $aula in
@@ -27,6 +28,7 @@ done
 puesto=""
 while [[ ! $puesto ]]; do
   read -p "Indica el puesto (A1, A2... F3, F4): " puesto < /dev/tty
+  [[ $puesto ]] || continue
   puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]')
   if [[ ! $puesto =~ ^[A-F][0-5]$ ]]; then
       read -p "Puesto $puesto no contemplado. ¿Seguro que quieres usar ese id? (y/n): " confirm < /dev/tty
