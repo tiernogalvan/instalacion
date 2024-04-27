@@ -47,5 +47,5 @@ hostnamectl hostname $hostname
 devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}')
 for dev in $devs ; do
   mac=$(cat /sys/class/net/${dev}/address)
-  wget -q "https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
+  wget -q -O /dev/null "https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
 done
