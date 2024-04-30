@@ -6,14 +6,22 @@ if [[ "$EUID" -ne 0 ]]; then
   die "Please run as root"
 fi
 
-apt-get update -y
-apt-get install -y git
+# Pre-cleanup
+[[ -f /root/main.zip ]] && rm -f /root/main.zip
+[[ -d /root/instalacion-main ]] && rm -rf /root/instalacion-main
 
+# Download repo as zip
 cd /root
-[[ -d instalacion ]] && rm -rf instalacion
-git clone https://github.com/tiernogalvan/instalacion.git
-cd instalacion
+zip='https://github.com/tiernogalvan/instalacion/archive/refs/heads/main.zip'
+wget $zip
+unzip -q main.zip
+cd instalacion-main
+
 time bash ./install.sh
-rm -r /root/instalacion
+
+# Post-cleanup
+rm -f /root/main.zip
+rm -rf /root/instalacion-main
 
 echo "Fin de la instalación :)"
+
