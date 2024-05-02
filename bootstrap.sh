@@ -17,7 +17,8 @@ wget $zip
 unzip -q main.zip
 cd instalacion-main
 
-time bash ./install.sh
+# Redirecting to tty avoids with pipes: cat boostrap.sh | bash
+time bash ./install.sh < /dev/tty > /dev/tty
 
 # Post-cleanup
 rm -f /root/main.zip

@@ -4,11 +4,12 @@
 # Envía los datos al servidor junto a la MAC del equipo.
 #
 
+# Sets variable aula
 read_aula() {
   aula=""
   while [[ ! $aula ]]; do
     # Forcing the read from tty allows this script to be run from a pipe
-    read -p "Indica el aula (B15, B17, B21, B22...): " aula < /dev/tty
+    read -p "Indica el aula (B15, B17, B21, B22...): " aula 
     [[ $aula ]] || continue
     aula=$(echo $aula | tr '[:lower:]' '[:upper:]')
     [[ $aula =~ ^[0-9][0-9]$ ]] && aula="B$aula"
@@ -16,8 +17,7 @@ read_aula() {
       B15|B17|B21|B22|B23|B24|B25|B27|B32) 
         ;;
       *)
-        echo "El aula debería ser: B15, B17, B21, B22, B23, B24, B25, B27, B32" > /dev/tty
-        read -p "¿Seguro que quieres usar ${aula}? (y/n): " confirm < /dev/tty
+        read -p "Aula no reconocida. ¿Seguro que quieres usar ${aula}? (y/n): " confirm 
         if [[ $confirm != 'y' ]]; then
           aula=""
           echo > /dev/tty
@@ -25,51 +25,87 @@ read_aula() {
         ;;
     esac
   done
-  echo $aula
 }
 
+# Sets variable puesto
 read_puesto() {
   puesto=""
   while [[ ! $puesto ]]; do
-    read -p "Indica el puesto (A1, A2... F3, F4): " puesto < /dev/tty
+    read -p "Indica el puesto (A1, A2... F3, F4): " puesto 
     [[ $puesto ]] || continue
-    puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]')
+    puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]' | tr ' .' '__')
     if [[ ! $puesto =~ ^[A-F][0-5]$ ]]; then
-        read -p "Puesto no contemplado. ¿Seguro que quieres usar ${puesto}? (y/n): " confirm < /dev/tty
+        read -p "Puesto no reconocido. ¿Seguro que quieres usar ${puesto}? (y/n): " confirm 
         if [[ $confirm != 'y' ]]; then
           puesto=""
-          echo > /dev/tty
+          echo
         fi
     fi
   done
-  echo $puesto
 }
 
-hostname_is_ok() {
-  [[ $(hostname | grep -E '^B[0-9]{2}-[A-F][0-5]$') ]] && echo $(hostname)
+# Sets variable confirmed
+confirm_puesto() {
+  name="$1"
+  aula=$(echo $name | cut -d- -f1)
+  puesto=$(echo $name | cut -d- -f2)
+  correcto=''
+  while [[ ! $correcto ]]; do
+    echo "Nombre de equipo detectado $name"
+    echo "  Aula:   $aula"
+    echo "  Puesto: $puesto"
+    read -p "¿Es correcto? (y/n): " correcto
+    [[ $correcto = 'y' || $correcto = 's' ]] && confirmed='y'
+  done
 }
 
-set_hostname=true
-if [[ $(hostname_is_ok) ]]; then
-  echo "Equipo detectado."
-  echo "  Aula: $(hostname | cut -d'-' -f1)"
-  echo "  Puesto: $(hostname | cut -d'-' -f2)"
-  read -p "¿Es correcto? (y/n): " correcto
-  [[ $correcto = 'y' ]] && unset set_hostname
-fi
-
-if [[ $set_hostname ]]; then
-  aula=$(read_aula)
-  puesto=$(read_puesto)
-  hostname="${aula}-${puesto}"
+configure_host() {
+  hostname="$1"
   echo "Setting hostname $hostname"
   hostnamectl hostname $hostname
-fi
+  # Send the mac address
+  devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}' | sort | uniq)
+  for dev in $devs ; do
+    mac=$(cat /sys/class/net/${dev}/address)
+    url="https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
+    echo "Sending $url"
+    wget -q -O /dev/null "$url"
+  done
+}
 
+# Array of possible names to check
+possible_names=()
+add_possible() {
+  if [[ ! ${possible_names[$1]} ]]; then
+    possible_names+=($1)
+  fi
+}
 
-# Send the mac address
-devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}')
-for dev in $devs ; do
-  mac=$(cat /sys/class/net/${dev}/address)
-  wget -q -O /dev/null "https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
+add_possible "$(hostname)"
+
+# Add all reverse lookups for the main IP address
+main_ip=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}' | head -n1)
+lookup_list=$(dig +short -x $main_ip)
+for lookup in "${lookup_list[@]}"; do
+  name=$(echo $lookup | cut -d. -f1)
+  add_possible "$name"
 done
+
+# Ask user to confirm detected names
+for name in "${possible_names[@]}"; do
+  if [[ $name =~ ^B[0-9][0-9]-[A-F][0-5]$ ]]; then
+    confirm_puesto "$name"
+    if [[ $confirmed == 'y' ]]; then
+      configure_host "$name"      
+      exit
+    fi
+  fi
+done
+
+echo
+echo "Configuración manual:"
+read_aula
+read_puesto
+host="${aula}-${puesto}"
+configure_host "$host"
+
