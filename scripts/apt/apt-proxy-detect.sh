@@ -1,31 +1,45 @@
 #!/bin/bash
+# Test the list of cache servers to return the first one alive as APT cache,
+# or fallback to direct download.
+# APT runs this expecting to return just one line, so we make an effort 
+# not to return anything else.
 #
 # This is called from /etc/apt/apt.conf.d/01proxy.conf:
 # Acquire::http::Proxy-Auto-Detect "/usr/bin/apt-proxy-detect.sh";
 #
-cache_servers=("172.20.0.21" "172.20.0.22")
+# servers=("172.20.0.21" "172.20.0.22")
+servers=("172.20.0.21")
 port=3142
+timeout=3
+retry=2
+logfile='/var/log/apt/apt-proxy-detect.log'
 
-# Method 1 requires netcat installed
-# [[ $(nc -w1 -z $ip $port &>/dev/null; echo $?) -eq 0 ]]
-#
-# Method 2 using linux:
-# (echo > /dev/tcp/skinner/22) >/dev/null 2>&1 && echo "It's up" || echo "It's down"
-server_reachable() {
- # (echo > /dev/tcp/$1/$2) >/dev/null 2>&1 && true || false
- if (echo > /dev/tcp/${1}/${2}) >/dev/null 2>&1 ; then
-   true
- else
-   false
- fi
+log() {
+  msg="[$(date "+%Y-%m-%d %H:%M:%S")] $@" 
+  (echo "$msg" >> $logfile) &>/dev/null
 }
 
-for ip in "${cache_servers[@]}"; do
-  if server_reachable $ip $port ; then
-      echo -n "http://${ip}:${port}/"
-      exit 0
+server_reachable() {
+  if timeout $timeout bash -c "</dev/tcp/${1}/${2}" &>/dev/null ; then
+    true
+  else
+    log "Proxy down http://${1}:${2}"
+    false
   fi
+}
+
+# In case we add multiple cache servers, uncomment this to shuffle them
+# [[ $(which shuf) ]] && servers=( $(shuf -e "${servers[@]}") )
+
+for ip in "${servers[@]}"; do
+  for ((n=0; n < $retry; n++)); do
+    if server_reachable $ip $port ; then
+        echo -n "http://${ip}:${port}/"
+        exit 0
+    fi
+  done
 done
 
-# Fallback to direct download
+log "Fallback to direct apt download (no proxy)"
+timeout $timeout wget -q https://lan.tiernogalvan.es/msg/apt-proxy-fallback-direct
 echo -n "DIRECT"
