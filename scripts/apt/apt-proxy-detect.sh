@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# This is called from /etc/apt/apt.conf.d/01proxy-fallback.conf:
+# This is called from /etc/apt/apt.conf.d/01proxy.conf:
 # Acquire::http::Proxy-Auto-Detect "/usr/bin/apt-proxy-detect.sh";
 #
 cache_servers=("172.20.0.21" "172.20.0.22")
