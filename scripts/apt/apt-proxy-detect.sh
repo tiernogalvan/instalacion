@@ -1,4 +1,6 @@
 #!/bin/bash
+# IES Enrique Tierno Galvan
+#
 # Test the list of cache servers to return the first one alive as APT cache,
 # or fallback to direct download.
 # APT runs this expecting to return just one line, so we make an effort 
@@ -34,7 +36,7 @@ server_reachable() {
 for ip in "${servers[@]}"; do
   for ((n=0; n < $retry; n++)); do
     if server_reachable $ip $port ; then
-        echo -n "http://${ip}:${port}/"
+        printf "http://${ip}:${port}/"
         exit 0
     fi
   done
@@ -42,4 +44,4 @@ done
 
 log "Fallback to direct apt download (no proxy)"
 timeout $timeout wget -q https://lan.tiernogalvan.es/msg/apt-proxy-fallback-direct
-echo -n "DIRECT"
+printf "DIRECT"
