@@ -37,5 +37,6 @@ run_install ssh
 run_install ldap
 run_install auth
 run_install bash
+run_install resolve
 run_install apps
 run_install containers
