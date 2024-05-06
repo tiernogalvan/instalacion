@@ -23,10 +23,12 @@ echo \
 
 apt-get update
 
+# Grupo 999 para que coincida con el de ldap
+addgroup -g 999 docker
+
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
-addgroup docker
-
+# TODO: esto ya se puede quitar?
 chown root:docker /var/run/docker.sock
 systemctl enable docker
 systemctl start docker
