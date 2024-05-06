@@ -27,7 +27,7 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 
 addgroup docker
 
-systemctl enable docker
+chown root:docker /var/run/docker.sock
 
 # This should be handled by LDAP
 # whoami | xargs -I % adduser % docker
