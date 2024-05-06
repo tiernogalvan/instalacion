@@ -44,7 +44,7 @@ fi
 
 if [[ ! $(docker ps --all | grep diurno-xampp) ]]; then
   mkdir -p /home/diurno/xampp
-  chown diurno:diurno /home/diurno/xampp
+  chown diurno:alumno -R /home/diurno
   chmod 777 -R /home/diurno/xampp
   docker run --name diurno-xampp -p 41061:22 -p 41062:80 -d -v /home/diurno/xampp:/www tomsik68/xampp:8
   docker stop diurno-xampp
@@ -52,7 +52,7 @@ fi
 
 if [[ ! $(docker ps --all | grep vespertino-xampp) ]]; then
   mkdir -p /home/vespertino/xampp
-  chown vespertino:vespertino /home/vespertino/xampp
+  chown vespertino:alumno -R /home/vespertino
   chmod 777 -R /home/vespertino/xampp
   docker run --name vespertino-xampp -p 41061:22 -p 41062:80 -d -v /home/vespertino/xampp:/www tomsik68/xampp:8
   docker stop vespertino-xampp
