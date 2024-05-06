@@ -15,9 +15,9 @@ wget -qO- https://instalacion.lan.tiernogalvan.es | sudo bash
 
 Si por fallase el comando anterior, puedes realizar la instalación con estos pasos:
 
-```
-$ sudo apt-get install -y git
-$ git clone https://github.com/tiernogalvan/instalacion.git
-$ cd instalacion
-$ sudo bash ./install.sh
+```bash
+sudo apt-get install -y git
+git clone https://github.com/tiernogalvan/instalacion.git
+cd instalacion
+sudo bash ./install.sh
 ```
