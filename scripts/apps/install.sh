@@ -28,15 +28,6 @@ addgroup -g 999 docker
 
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
-# TODO: esto ya se puede quitar?
-chown root:docker /var/run/docker.sock
-systemctl enable docker
-systemctl start docker
-
-# This should be handled by LDAP
-# whoami | xargs -I % adduser % docker
-
-
 # CHROME
 
 # TODO: este apt install es necesario?
