@@ -27,5 +27,5 @@ sudo bash ./install.sh
 Script para arreglar permisos de Docker. Este problema sólo debería ocurrir en las instalaciones de la B23 y B27
 
 ```bash
-wget -qO- https://github.com/tiernogalvan/instalacion/fix_docker.sh | sudo bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_docker.sh | sudo bash
 ```
