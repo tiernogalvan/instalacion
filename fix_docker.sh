@@ -11,7 +11,7 @@ clear
 systemctl stop sssd
 
 # Grupo 999 para que coincida con el de ldap
-addgroup -g 999 docker
+addgroup --gid 999 docker
 
 systemctl start sssd
 

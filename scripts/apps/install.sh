@@ -24,7 +24,7 @@ echo \
 apt-get update
 
 # Grupo 999 para que coincida con el de ldap
-addgroup -g 999 docker
+addgroup --gid 999 docker
 
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
