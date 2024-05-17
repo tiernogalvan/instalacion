@@ -76,7 +76,7 @@ configure_host() {
 # Array of possible names to check
 possible_names=()
 add_possible() {
-  if [[ ! ${possible_names[$1]} ]]; then
+  if [[ ! ${possible_names[@]} =~ $1 ]]; then
     possible_names+=($1)
   fi
 }
