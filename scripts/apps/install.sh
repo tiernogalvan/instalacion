@@ -23,8 +23,17 @@ echo \
 
 apt-get update
 
-# Grupo 999 para que coincida con el de ldap
+# Se detiene LDAP client
+systemctl stop sssd
+
+# Se eliminan los grupos cacheados
+sss_cache -E
+
+# Se crea el grupo 999 para que coincida con el de ldap
 addgroup --gid 999 docker
+
+# Se arranca LDAP client
+systemctl start sssd
 
 apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 
