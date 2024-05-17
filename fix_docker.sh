@@ -10,6 +10,8 @@ clear
 
 systemctl stop sssd
 
+sss_cache -E
+
 # Grupo 999 para que coincida con el de ldap
 addgroup --gid 999 docker
 
