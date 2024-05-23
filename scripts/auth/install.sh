@@ -5,17 +5,7 @@
 # Si alguien cambia estas líneas a mano este script añadiría nuevas reglas en vez de sustituirlas.
 #
 
-ensure_line_in_file () {
-  file="$1"
-  pattern="$2"
-  line="$3"
-  # Use -F to match literal string, not regex
-  if [[ ! $(grep -F "$pattern" "$file") ]]; then
-    echo "$line" >> $file
-  else
-    sed -i "s%.*${pattern}.*%${line}%g" "$file"
-  fi
-}
+source ../functions.sh
 
 ensure_line_in_file /etc/security/time.conf diurno     '* ; * ; diurno     ; Al0800-1500'
 ensure_line_in_file /etc/security/time.conf vespertino '* ; * ; vespertino ; Al1500-2200'
