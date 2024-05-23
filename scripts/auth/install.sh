@@ -8,7 +8,8 @@
 ensure_line_in_file () {
   file="$1"
   line="$2"
-  if [[ ! $(grep "$line" "$file") ]]; then
+  # Use -F to match literal string, not regex
+  if [[ ! $(grep -F "$line" "$file") ]]; then
     echo "$line" >> $file
   fi
 }
