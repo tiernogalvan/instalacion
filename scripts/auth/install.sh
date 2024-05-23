@@ -12,6 +12,8 @@ ensure_line_in_file () {
   # Use -F to match literal string, not regex
   if [[ ! $(grep -F "$pattern" "$file") ]]; then
     echo "$line" >> $file
+  else
+    sed -i "s%.*${pattern}.*%${line}%g" "$file"
   fi
 }
 
