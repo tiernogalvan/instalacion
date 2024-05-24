@@ -21,3 +21,7 @@ ensure_line_in_file /etc/pam.d/common-session pam_mkhomedir.so 'session optional
 mkdir -p /etc/ldap
 install -o root -g root -m 0644 -t /etc/ldap/ -D ldap.conf
 
+# Creando estos ficheros apareceran estos usuarios disponibles en el login
+# Deben existir también en LDAP para que se muestren.
+touch /var/lib/AccountsService/users/diurno
+touch /var/lib/AccountsService/users/vespertino
