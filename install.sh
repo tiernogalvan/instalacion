@@ -40,3 +40,7 @@ run_install bash
 run_install resolve
 run_install apps
 run_install containers
+run_install veyon
+
+echo "Fin del script :)"
+echo "Debes reiniciar el sistema."

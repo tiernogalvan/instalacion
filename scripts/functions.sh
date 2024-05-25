@@ -1,6 +1,10 @@
 #!/bin/bash
 # Functions to be used by other scripts
 
+# GIDs de grupos configurados en el LDAP
+PROFESORES_GID=10000
+ALUMNOS_GID=10001
+
 # Detects a pattern in a file:
 # - If found: ensures the line is exactly the passed line
 # - If not found: inserts line at the end
