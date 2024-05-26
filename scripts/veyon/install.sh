@@ -16,6 +16,10 @@ veyon-cli config import ./veyon-config-client.json
 
 # Habilitar Veyon solo para profesores
 chmod o-rwx /usr/share/applications/veyon-*
-chmod o-rwx /bin/veyon-*
+chmod o-rwx /bin/veyon-cli
+chmod o-rwx /bin/veyon-master
+chmod o-rwx /bin/veyon-configurator
 chgrp $PROFESORES_GID /usr/share/applications/veyon-*
-chgrp $PROFESORES_GID /bin/veyon-*
+chgrp $PROFESORES_GID /bin/veyon-cli
+chgrp $PROFESORES_GID /bin/veyon-master
+chgrp $PROFESORES_GID /bin/veyon-configurator
