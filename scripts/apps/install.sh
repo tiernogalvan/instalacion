@@ -3,7 +3,7 @@
 # This script should be run in a fresh installation of Ubuntu 22.04
 #
 
-apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh veyon-service mysql-client-8.0 postgresql-client
+apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
