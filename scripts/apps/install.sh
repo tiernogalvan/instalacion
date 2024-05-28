@@ -52,13 +52,18 @@ sudo apt install google-chrome-stable
 apt autoremove -y
 apt autoclean -y
 
+# Netbeans
+snap remove netbeans
+wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
+apt install ./apache-netbeans_21-1_all.deb -y
+rm apache-netbeans_21-1_all.deb
+
 # SNAPS
 # Instalación Snap Proxy https://docs.ubuntu.com/snap-store-proxy/en/install
 curl -sL http://172.20.0.21/v2/auth/store/assertions | sudo snap ack /dev/stdin
 snap set core proxy.store=jEKSatomRZOrcmvRGlShFDdVCG0DZMnw
 
 snap install eclipse --classic
-snap install netbeans --classic
 snap install sublime-text --classic
 snap install android-studio --classic
 snap install intellij-idea-community --classic
