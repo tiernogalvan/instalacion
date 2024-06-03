@@ -42,6 +42,7 @@ run_install apps
 run_install containers
 run_install veyon
 run_install cron
+run_install wake-on-lan
 
 echo "Fin del script :)"
 echo "Debes reiniciar el sistema."
