@@ -53,10 +53,12 @@ apt autoremove -y
 apt autoclean -y
 
 # Netbeans
-snap remove netbeans
-wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
-apt install ./apache-netbeans_21-1_all.deb -y
-rm apache-netbeans_21-1_all.deb
+if [[dpkg -l | grep netbeans | wc -l = 0]]; then
+  snap remove netbeans
+  wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
+  apt install ./apache-netbeans_21-1_all.deb -y
+  rm apache-netbeans_21-1_all.deb
+fi
 
 # SNAPS
 # Instalación Snap Proxy https://docs.ubuntu.com/snap-store-proxy/en/install

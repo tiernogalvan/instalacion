@@ -8,6 +8,7 @@ source ../functions.sh
 ensure_line_in_file /etc/gdm3/custom.conf WaylandEnable 'WaylandEnable=false'
 
 add-apt-repository -y ppa:veyon/stable
+apt-get remove -y veyon-*
 apt-get install -y veyon
 
 veyon-cli config import ./veyon-config-client.json
