@@ -41,6 +41,7 @@ run_install resolve
 run_install apps
 run_install containers
 run_install veyon
+run_install cron
 
 echo "Fin del script :)"
 echo "Debes reiniciar el sistema."
