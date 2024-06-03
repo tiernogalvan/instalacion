@@ -7,6 +7,9 @@ source ../functions.sh
 # Para comprobarlo: `echo $XDG_SESSION_TYPE` debe poner x11, no wayland
 ensure_line_in_file /etc/gdm3/custom.conf WaylandEnable 'WaylandEnable=false'
 
+# Universe es imprescindible para las dependencias de veyon
+add-apt-repository -y universe
+
 add-apt-repository -y ppa:veyon/stable
 apt-get remove -y veyon-*
 
