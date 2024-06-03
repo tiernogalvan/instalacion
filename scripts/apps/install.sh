@@ -11,31 +11,33 @@ apt-get upgrade -y
 # DOCKER
 
 # Add Docker's official GPG key:
-install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
-chmod a+r /etc/apt/keyrings/docker.gpg
+if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
+  install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
+  chmod a+r /etc/apt/keyrings/docker.gpg
 
-# Add the Docker repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  tee /etc/apt/sources.list.d/docker.list > /dev/null
+  # Add the Docker repository to Apt sources:
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-apt-get update
+  apt-get update
 
-# Se detiene LDAP client
-systemctl stop sssd
+  # Se detiene LDAP client
+  systemctl stop sssd
 
-# Se eliminan los grupos cacheados
-sss_cache -E
+  # Se eliminan los grupos cacheados
+  sss_cache -E
 
-# Se crea el grupo 999 para que coincida con el de ldap
-addgroup --gid 999 docker
+  # Se crea el grupo 999 para que coincida con el de ldap
+  addgroup --gid 999 docker
 
-# Se arranca LDAP client
-systemctl start sssd
+  # Se arranca LDAP client
+  systemctl start sssd
 
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
+  apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
+fi
 
 # CHROME
 
