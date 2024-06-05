@@ -45,4 +45,13 @@ run_install cron
 run_install wake-on-lan
 
 echo "Fin del script :)"
-echo "Debes reiniciar el sistema."
+
+if [[ $1 = "-s" ]]; then
+  echo "Apagando..."
+  shutdown -h now
+elif [[ $1 = "-r" ]]; then
+  echo "Reiniciando..."
+  reboot
+else 
+  echo "Debes reiniciar el sistema."
+fi
