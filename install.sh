@@ -46,10 +46,10 @@ run_install wake-on-lan
 
 echo "Fin del script :)"
 
-if [[ $1 = "-s" ]]; then
+if [[ $1 == "-s" ]]; then
   echo "Apagando..."
   shutdown -h now
-elif [[ $1 = "-r" ]]; then
+elif [[ $1 == "-r" ]]; then
   echo "Reiniciando..."
   reboot
 else 
