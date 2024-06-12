@@ -11,7 +11,7 @@ ensure_line_in_file /etc/gdm3/custom.conf WaylandEnable 'WaylandEnable=false'
 add-apt-repository -y universe
 
 add-apt-repository -y ppa:veyon/stable
-apt-get remove -y veyon-*
+apt-get remove -y veyon-configurator veyon-master veyon-plugins veyon-service
 
 # Ojo!! No instalar los paquetes veyon-* (incompatibles con paquete veyon)
 apt-get install -y veyon
