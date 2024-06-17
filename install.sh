@@ -44,6 +44,10 @@ run_install veyon
 run_install cron
 run_install wake-on-lan
 
+apt install --fix-missing -y
+apt autoremove -y
+apt autoclean -y
+
 echo "Fin del script :)"
 
 if [[ $1 == "-s" ]]; then
