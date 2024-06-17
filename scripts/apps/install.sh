@@ -55,13 +55,13 @@ if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
 fi
 
 
-# Netbeans
-if [[ $(dpkg -l | grep netbeans | wc -l) -eq 0 ]]; then
-  snap remove netbeans
-  wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
-  apt install ./apache-netbeans_21-1_all.deb -y
-  rm apache-netbeans_21-1_all.deb
-fi
+# Netbeans 
+#if [[ $(dpkg -l | grep netbeans | wc -l) -eq 0 ]]; then
+#  snap remove netbeans
+#  wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
+#  apt install ./apache-netbeans_21-1_all.deb -y
+#  rm apache-netbeans_21-1_all.deb
+#fi
 
 apt autoremove -y
 apt autoclean -y
