@@ -43,16 +43,17 @@ fi
 
 # TODO: este apt install es necesario?
 apt install libxss1 libappindicator1 libindicator7 -y
-chromegpg="/usr/share/keyrings/google-chrome.gpg"
-curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
-echo deb [arch=amd64 signed-by=${chromegpg}] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
-sudo apt update
-sudo apt install google-chrome-stable
-# wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-# apt install ./google-chrome*.deb -y
 
-apt autoremove -y
-apt autoclean -y
+if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
+  chromegpg="/usr/share/keyrings/google-chrome.gpg"
+  curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
+  echo deb [arch=amd64 signed-by=${chromegpg}] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  sudo apt update
+  sudo apt install google-chrome-stable
+  # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  # apt install ./google-chrome*.deb -y
+fi
+
 
 # Netbeans
 if [[ $(dpkg -l | grep netbeans | wc -l) -eq 0 ]]; then
@@ -61,6 +62,9 @@ if [[ $(dpkg -l | grep netbeans | wc -l) -eq 0 ]]; then
   apt install ./apache-netbeans_21-1_all.deb -y
   rm apache-netbeans_21-1_all.deb
 fi
+
+apt autoremove -y
+apt autoclean -y
 
 # SNAPS
 # Instalación Snap Proxy https://docs.ubuntu.com/snap-store-proxy/en/install
