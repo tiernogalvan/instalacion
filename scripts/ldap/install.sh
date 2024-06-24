@@ -21,6 +21,13 @@ ensure_line_in_file /etc/pam.d/common-session pam_mkhomedir.so 'session optional
 mkdir -p /etc/ldap
 install -o root -g root -m 0644 -t /etc/ldap/ -D ldap.conf
 
+
+# Deshabilita la configuración de scripts/auth para poder inicializar los usuarios
+# Este script en principio se ejecuta antes que scripts/auth, pero podemos
+# estar ejecutando la instalacion una segunda vez.
+pam-auth-update --remove tierno-login-time
+
+
 inicializar_usuario() {
   user="$1"
 
