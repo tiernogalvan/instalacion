@@ -1,0 +1,8 @@
+Name: Tierno pam login times
+Default: no
+Priority: 100
+
+Account-Type: Additional
+Account:
+	[success=1 new_authtok_reqd=ok ignore=ignore default=bad] pam_time.so debug
+	[default=ignore] pam_exec.so stdout /usr/local/sbin/tierno_pam_time_denied.sh
