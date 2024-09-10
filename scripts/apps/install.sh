@@ -7,6 +7,9 @@ apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools term
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
+# PHP
+
+apt-get install php libapache2-mod-php -y
 
 # DOCKER
 
