@@ -29,3 +29,18 @@ Script para arreglar permisos de Docker. Este problema sólo debería ocurrir en
 ```bash
 wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_docker.sh | sudo bash
 ```
+
+## Creación de usuario local para estudiantes
+
+Script para crear un usuario local en los ordenadores de los estudiantes en caso de que haya algún problema con LDAP
+
+```bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/scripts/local_user/install.sh | sudo bash
+```
+
+Si se desea eliminar el usuario estudiante ejecutar
+
+```bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/scripts/local_user/remove.sh | sudo bash
+```
+
