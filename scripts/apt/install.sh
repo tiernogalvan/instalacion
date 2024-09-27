@@ -16,3 +16,6 @@ apt-get upgrade -y
 apt-get install -y ca-certificates curl wget gnupg git git-gui rar net-tools openssl vim ncdu python3-pip pipx fzf btop htop duf
 apt-get autoremove -y
 apt-get autoclean -y
+
+# Hace que no vuelva a pedir confirmación de upgrada a otra versión, aunque sea LTS
+cp release-upgrades /etc/update-manager/
