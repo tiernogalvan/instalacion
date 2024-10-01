@@ -3,7 +3,7 @@
 # This script should be run in a fresh installation of Ubuntu 22.04
 #
 
-apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator virtualbox neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice
+apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
@@ -65,6 +65,19 @@ fi
 #  apt install ./apache-netbeans_21-1_all.deb -y
 #  rm apache-netbeans_21-1_all.deb
 #fi
+
+# Virtualbox
+# Fix para Ubuntu 22.04, que instala virtualbox 6 y necesitamos la 7
+# Revisar en Ubuntu 24!!
+if [[ $(dpkg -s virtualbox) ]]; then
+  apt remove --purge -y virtualbox
+  apt autoremove -y
+fi
+wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+apt update
+apt install virtualbox-7.1
+
 
 apt autoremove -y
 apt autoclean -y
