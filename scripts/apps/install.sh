@@ -9,7 +9,17 @@ apt-get upgrade -y
 
 # PHP
 
-apt-get install php libapache2-mod-php -y
+apt-get install php libapache2-mod-php php-pear php-dev -y
+pecl install xdebug
+
+# NodeJS
+
+if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
+  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  apt update
+  apt install -y nodejs
+fi
+
 
 # DOCKER
 
