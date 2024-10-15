@@ -93,9 +93,8 @@ apt autoremove -y
 apt autoclean -y
 
 # SNAPS
-# Instalación Snap Proxy https://docs.ubuntu.com/snap-store-proxy/en/install
-curl -sL http://172.20.0.21/v2/auth/store/assertions | sudo snap ack /dev/stdin
-snap set core proxy.store=jEKSatomRZOrcmvRGlShFDdVCG0DZMnw
+# Deshabilitado proxy de snap
+snap unset system proxy.store
 
 snap install eclipse --classic
 snap install sublime-text --classic
