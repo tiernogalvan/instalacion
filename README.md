@@ -7,7 +7,7 @@ Este repositorio contiene scripts de instalación de ordenadores de alumnos
 Para instalar ejecuta el siguiente comando:
 
 ```bash
-wget -o- https://raw.githubusercontent.com/tiernogalvan/instalacion/refs/heads/main/install.sh | sudo bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/refs/heads/main/install.sh | sudo bash
 ```
 
 
