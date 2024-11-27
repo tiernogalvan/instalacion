@@ -26,6 +26,7 @@ fi
 # Add Docker's official GPG key:
 if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
   install -m 0755 -d /etc/apt/keyrings
+  rm -rf /etc/apt/keyrings/docker.gpg
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
   chmod a+r /etc/apt/keyrings/docker.gpg
 
