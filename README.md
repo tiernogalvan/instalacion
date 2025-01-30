@@ -22,6 +22,14 @@ cd instalacion
 sudo bash ./install.sh
 ```
 
+## Arreglar nombre del usuario administrator
+
+Se debe ejecutar este script desde un usuario nominal de profesor, pasando el nombre de usuario actual del administrador como parámetro
+
+```bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_administrator.sh <nombreErroneo>  | sudo bash
+```
+
 ## Arreglar permisos de Docker (TODO eliminar cuando se haya solucionado la B23)
 
 Script para arreglar permisos de Docker. Este problema sólo debería ocurrir en las instalaciones de la B23 y B27
