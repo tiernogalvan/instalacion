@@ -43,4 +43,7 @@ inicializar_usuario() {
 inicializar_usuario diurno
 inicializar_usuario vespertino
 
+# Deshabilitamos el login local de administrator
+passwd -l administrator
+
 # Conviene reiniciar sesión

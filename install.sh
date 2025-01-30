@@ -32,6 +32,7 @@ run_install hostname  # Must be first
 echo "Comenzando instalación..."
 echo
 
+run_install fix_admin_user
 run_install apt
 run_install ssh
 run_install ldap
