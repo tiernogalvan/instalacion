@@ -27,7 +27,7 @@ sudo bash ./install.sh
 Abrimos la sesión con un usuario que sea sudoer y ejecutamos. El script pedirá que se introduzca el password del nuevo usuario temp, introduce el password deseado
 
 ```bash
-sudo adduser -s /bin/bash -m temp
+sudo useradd -s /bin/bash -m temp
 sudo usermod -aG sudo temp
 sudo passwd temp
 ```

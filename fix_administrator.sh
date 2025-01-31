@@ -8,4 +8,4 @@ echo Se va a renombrar el usuario $1 a administrator
 groupadd administrator
 sss_cache -u administrator
 sss_cache -E
-usermod -m -g administrator -l administrator $1
+usermod -g administrator -l administrator $1
