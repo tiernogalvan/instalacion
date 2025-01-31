@@ -24,10 +24,24 @@ sudo bash ./install.sh
 
 ## Arreglar nombre del usuario administrator
 
-Se debe ejecutar este script desde un usuario nominal de profesor, pasando el nombre de usuario actual del administrador como parámetro
+Abrimos la sesión con un usuario que sea sudoer y ejecutamos. El script pedirá que se introduzca el password del nuevo usuario temp, introduce el password deseado
+
+```bash
+sudo adduser -s /bin/bash -m temp
+sudo usermod -aG sudo temp
+sudo passwd temp
+```
+Cierra sesión y haz login con el usuario temp que se acaba de crear, ejecuta el siguiente script pasando como parámetro el nombre del usuario de instalación actual.
 
 ```bash
 wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_administrator.sh <nombreErroneo>  | sudo bash
+```
+
+Haz logout y vuelve a hacer login con el usuario administrator. Ejecuta este comando
+
+
+```bash
+sudo userdel -r temp
 ```
 
 ## Arreglar permisos de Docker (TODO eliminar cuando se haya solucionado la B23)
