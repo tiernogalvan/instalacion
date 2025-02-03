@@ -11,3 +11,5 @@ sss_cache -u administrator
 sss_cache -E
 
 usermod -g administrator -l administrator $1
+
+# Renombrado completado
