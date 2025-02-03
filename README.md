@@ -31,10 +31,10 @@ sudo useradd -s /bin/bash -m temp
 sudo usermod -aG sudo temp
 sudo passwd temp
 ```
-Cierra sesión y haz login con el usuario temp que se acaba de crear, ejecuta el siguiente script pasando como parámetro el nombre del usuario de instalación actual.
+Cierra sesión y haz login con el usuario temp que se acaba de crear, ejecuta el siguiente script.
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_administrator.sh <nombreErroneo>  | sudo bash
+wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_administrator.sh | sudo bash
 ```
 
 Haz logout y vuelve a hacer login con el usuario administrator. Ejecuta este comando
