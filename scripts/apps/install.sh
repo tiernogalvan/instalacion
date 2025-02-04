@@ -89,11 +89,15 @@ if [[ $(dpkg -s virtualbox) ]]; then
   apt remove --purge -y virtualbox
   apt autoremove -y
 fi
-wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-apt update
-apt install -y virtualbox-7.1
 
+if [[ $(dpkg -l | grep virtualbox-7.1 | wc -l) -eq 0 ]]; then
+
+  wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+  apt update
+  apt install -y virtualbox-7.1
+
+fi
 
 apt autoremove -y
 apt autoclean -y
