@@ -44,6 +44,10 @@ inicializar_usuario diurno
 inicializar_usuario vespertino
 
 # Deshabilitamos el login local de administrator
+# Esto hace que solo funcione el password de LDAP
 passwd -l administrator
+
+# TODO podriamos eliminar todos los usuarios locales
+# que no sean administrator, así evitamos hackeos
 
 # Conviene reiniciar sesión

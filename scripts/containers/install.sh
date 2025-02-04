@@ -32,3 +32,18 @@ function create_postgress() {
 
 create_postgress diurno-postgres Sandia4you
 create_postgress vespertino-postgres Tokio2324
+
+
+# MongoDB
+
+function create_mongo() {
+  container_name="$1"
+  password="$2"
+  if [[ ! $(docker ps --all | grep $container_name) ]]; then
+    docker run --name $container_name -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=$password -p 27017:27017 -d mongo:8.0.3
+    docker stop $container_name
+  fi
+}
+
+create_mongo diurno-mongo Sandia4you
+create_mongo vespertino-mongo Tokio2324
