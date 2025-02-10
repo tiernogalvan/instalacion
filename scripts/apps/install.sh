@@ -77,12 +77,15 @@ fi
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   wget https://cloud.educa.madrid.org/s/cBbABMNLfzkaZek/download/Packet_Tracer822_amd64_signed.deb
   mv Packet_Tracer822_amd64_signed.deb /tmp/
+  CURRENT=$PWD
+  cd /tmp/
   # TODO descargar fichero
   debconf PacketTracer_822_amd64/accept-eula select true | sudo debconf-set-selections
   debconf PacketTracer_822_amd64/show-eula select false | sudo debconf-set-selections
-  DEBIAN_FRONTEND=noninteractive apt install /tmp/Packet_Tracer822_amd64_signed.deb -y
+  DEBIAN_FRONTEND=noninteractive apt install ./Packet_Tracer822_amd64_signed.deb -y
   # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   # apt install ./google-chrome*.deb -y
+  cd $CURRENT
 fi
 
 #
