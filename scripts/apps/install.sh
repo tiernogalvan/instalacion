@@ -74,7 +74,7 @@ fi
 
 # Packet tracer
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
-  wget https://cloud.educa.madrid.org/s/cBbABMNLfzkaZek/download/CiscoPacketTracer822_amd64_signed.deb
+  wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
