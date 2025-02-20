@@ -73,18 +73,14 @@ if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
 fi
 
 # Packet tracer
-
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
-  wget https://cloud.educa.madrid.org/s/cBbABMNLfzkaZek/download/Packet_Tracer822_amd64_signed.deb
-  mv Packet_Tracer822_amd64_signed.deb /tmp/
+  wget https://cloud.educa.madrid.org/s/cBbABMNLfzkaZek/download/CiscoPacketTracer822_amd64_signed.deb
+  mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
-  # TODO descargar fichero
-  debconf PacketTracer_822_amd64/accept-eula select true | sudo debconf-set-selections
-  debconf PacketTracer_822_amd64/show-eula select false | sudo debconf-set-selections
-  DEBIAN_FRONTEND=noninteractive apt install ./Packet_Tracer822_amd64_signed.deb -y
-  # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  # apt install ./google-chrome*.deb -y
+  debconf CiscoPacketTracer822_amd64/accept-eula select true | sudo debconf-set-selections
+  debconf CiscoPacketTracer822_amd64/show-eula select true | sudo debconf-set-selections
+  DEBIAN_FRONTEND=noninteractive apt install ./CiscoPacketTracer822_amd64_signed.deb -y
   cd $CURRENT
 fi
 
