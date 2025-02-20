@@ -80,7 +80,7 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   cd /tmp/
   debconf CiscoPacketTracer822_amd64/accept-eula select true | sudo debconf-set-selections
   debconf CiscoPacketTracer822_amd64/show-eula select true | sudo debconf-set-selections
-  DEBIAN_FRONTEND=noninteractive apt install ./CiscoPacketTracer822_amd64_signed.deb -y
+  apt install ./CiscoPacketTracer822_amd64_signed.deb -y
   cd $CURRENT
 fi
 
