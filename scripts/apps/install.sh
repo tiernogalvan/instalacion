@@ -78,9 +78,9 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
-  debconf CiscoPacketTracer822_amd64/accept-eula select true | sudo debconf-set-selections
-  debconf CiscoPacketTracer822_amd64/show-eula select true | sudo debconf-set-selections
-  apt install ./CiscoPacketTracer822_amd64_signed.deb -y
+  echo "packettracer packettracer/accept-eula boolean true" | sudo debconf-set-selections
+  echo "packettracer packettracer/show-eula boolean true" | sudo debconf-set-selections
+  DEBIAN_FRONTEND=noninteractive apt install ./CiscoPacketTracer822_amd64_signed.deb -y
   cd $CURRENT
 fi
 
@@ -104,11 +104,15 @@ fi
 
 if [[ $(dpkg -l | grep virtualbox-7.1 | wc -l) -eq 0 ]]; then
 
-  wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
-  echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-  apt update
-  apt install -y virtualbox-7.1
-  modprobe vboxdrv
+  if [[ $(mokutil --sb-state | grep enabled | wc -l) -eq 0 ]]; then
+    wget -O- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor --yes --output /usr/share/keyrings/oracle-virtualbox-2016.gpg
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle-virtualbox-2016.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+    apt update
+    apt install -y virtualbox-7.1
+    modprobe vboxdrv
+  else 
+    echo -e "\e[31mNo se puede instalar VirtualBox. Desactiva Secure Boot.\e[0m"
+  fi
 
 fi
 
