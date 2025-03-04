@@ -78,8 +78,8 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
-  echo "packettracer packettracer/accept-eula boolean true" | sudo debconf-set-selections
-  echo "packettracer packettracer/show-eula boolean true" | sudo debconf-set-selections
+  echo "PacketTracer PacketTracer_822_amd64/accept-eula boolean true" | sudo debconf-set-selections
+  echo "PacketTracer PacketTracer_822_amd64/show-eula boolean false" | sudo debconf-set-selections
   DEBIAN_FRONTEND=noninteractive apt install ./CiscoPacketTracer822_amd64_signed.deb -y
   cd $CURRENT
 fi
