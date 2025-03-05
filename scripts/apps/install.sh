@@ -20,6 +20,10 @@ if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
   apt install -y nodejs
 fi
 
+if [[ $(lsb_release -a | grep 24.04 | wc -l) -eq 1 ]]; then
+  wget http://mirrors.kernel.org/ubuntu/pool/universe/liba/libappindicator/libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/libd/libdbusmenu/libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb  
+  apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
+fi
 
 # DOCKER
 
