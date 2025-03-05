@@ -1,7 +1,4 @@
 #!/bin/bash
-#
-# This script should be run in a fresh installation of Ubuntu 22.04
-#
 
 BAD_NAME=$(cat /etc/passwd | grep :1000:1000: | awk -F : '{ print $1 }')
 

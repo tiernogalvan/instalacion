@@ -1,34 +1,43 @@
 #!/bin/bash
 #
-# This script should be run in a fresh installation of Ubuntu 22.04
+# This script should be run in a fresh installation of Ubuntu 22.04 or 24.04
 #
+
+# Arregla paquetes que puedan estar en mal estado
 dpkg --configure -a
+
+# Instalacion de paquetes basicos
 apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice fonts-opendyslexic nmap
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
 # PHP
-
 apt-get install php libapache2-mod-php php-pear php-dev -y
 pecl install xdebug
 
 # NodeJS
-
 if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
   curl -fsSL https://deb.nodesource.com/setup_23.x | sudo -E bash -
   apt update
   apt install -y nodejs
 fi
 
+# libappindicator1
 if [[ $(lsb_release -a | grep 24.04 | wc -l) -eq 1 ]]; then
-  wget http://mirrors.kernel.org/ubuntu/pool/universe/liba/libappindicator/libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/libd/libdbusmenu/libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb  
-  apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
+  # Instala libappindicator1 en Ubuntu 24.04, esta libreria es necesaria para otros paquetes como PacketTracer
+  if [[ $(dpkg -l | grep libappindicator1 | wc -l) -eq 0 ]]; then
+    wget http://mirrors.kernel.org/ubuntu/pool/universe/liba/libappindicator/libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/libd/libdbusmenu/libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb  
+    apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
+  fi
+else
+  # Instala libappindicator1 en Ubuntu 22.04
+  # TODO este apt install es necesario?
+  apt install libxss1 libappindicator1 libindicator7 -y
 fi
 
 # DOCKER
-
-# Add Docker's official GPG key:
 if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
+  # Add Docker's official GPG key:
   install -m 0755 -d /etc/apt/keyrings
   rm -rf /etc/apt/keyrings/docker.gpg
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --batch --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -57,15 +66,13 @@ if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
   apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-compose -y
 fi
 
+# MongoDB Compass
 if [[ $(dpkg -l | grep mongodb-compass | wc -l) -eq 0 ]]; then
   wget https://downloads.mongodb.com/compass/mongodb-compass_1.44.5_amd64.deb
   apt install ./mongodb-compass_1.44.5_amd64.deb
 fi
+
 # CHROME
-
-# TODO: este apt install es necesario?
-apt install libxss1 libappindicator1 libindicator7 -y
-
 if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
   chromegpg="/usr/share/keyrings/google-chrome.gpg"
   curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
@@ -76,7 +83,7 @@ if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
   # apt install ./google-chrome*.deb -y
 fi
 
-# Packet tracer
+# Packet Tracer
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
@@ -88,24 +95,7 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   cd $CURRENT
 fi
 
-#
-
-# Netbeans 
-#if [[ $(dpkg -l | grep netbeans | wc -l) -eq 0 ]]; then
-#  snap remove netbeans
-#  wget https://dlcdn.apache.org/netbeans/netbeans-installers/21/apache-netbeans_21-1_all.deb
-#  apt install ./apache-netbeans_21-1_all.deb -y
-#  rm apache-netbeans_21-1_all.deb
-#fi
-
-# Virtualbox
-# Fix para Ubuntu 22.04, que instala virtualbox 6 y necesitamos la 7
-# Revisar en Ubuntu 24!!
-if [[ $(dpkg -s virtualbox) ]]; then
-  apt remove --purge -y virtualbox
-  apt autoremove -y
-fi
-
+# VirtualBox 7
 if [[ $(dpkg -l | grep virtualbox-7.1 | wc -l) -eq 0 ]]; then
 
   if [[ $(mokutil --sb-state | grep enabled | wc -l) -eq 0 ]]; then
