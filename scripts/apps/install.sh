@@ -22,19 +22,6 @@ if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
   apt install -y nodejs
 fi
 
-# libappindicator1
-if [[ $(lsb_release -a | grep 24.04 | wc -l) -eq 0 ]]; then
-  # Instala libappindicator1 en Ubuntu 22.04
-  # TODO este apt install es necesario?
-  apt install libxss1 libappindicator1 libindicator7 -y
-else
-  # Instala libappindicator1 en Ubuntu 24.04, esta libreria es necesaria para otros paquetes como PacketTracer
-  if [[ $(dpkg -l | grep libappindicator1 | wc -l) -eq 0 ]]; then
-    wget http://mirrors.kernel.org/ubuntu/pool/universe/liba/libappindicator/libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/libd/libdbusmenu/libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb  
-    apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
-  fi
-fi
-
 # DOCKER
 if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
   # Add Docker's official GPG key:
@@ -85,6 +72,14 @@ fi
 
 # Packet Tracer
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
+  # Instala libappindicator1 en Ubuntu 24.04, esta libreria es necesaria para PacketTracer
+  if [[ $(lsb_release -a | grep 24.04 | wc -l) -ne 0 ]]; then
+    wget http://mirrors.kernel.org/ubuntu/pool/universe/liba/libappindicator/libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb http://mirrors.kernel.org/ubuntu/pool/universe/libd/libdbusmenu/libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb  
+    wget https://github.com/PetrusNoleto/Error-in-install-cisco-packet-tracer-in-ubuntu-23.10-unmet-dependencies/releases/download/CiscoPacketTracerFixUnmetDependenciesUbuntu23.10/libgl1-mesa-glx_23.0.4-0ubuntu1.22.04.1_amd64.deb
+    dpkg -i libgl1-mesa-glx_23.0.4-0ubuntu1.22.04.1_amd64.deb
+    apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
+  fi
+
   wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
