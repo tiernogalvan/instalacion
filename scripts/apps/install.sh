@@ -15,7 +15,7 @@ pecl install xdebug
 # NodeJS
 
 if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
-  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+  curl -fsSL https://deb.nodesource.com/setup_23.x | sudo -E bash -
   apt update
   apt install -y nodejs
 fi
