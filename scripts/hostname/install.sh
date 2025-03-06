@@ -31,10 +31,10 @@ read_aula() {
 read_puesto() {
   puesto=""
   while [[ ! $puesto ]]; do
-    read -p "Indica el puesto (A1, A2... F3, F4): " puesto 
+    read -p "Indica el puesto (A1, A2... G4, G5): " puesto 
     [[ $puesto ]] || continue
     puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]' | tr ' .' '__')
-    if [[ ! $puesto =~ ^[A-F][0-5]$ ]]; then
+    if [[ ! $puesto =~ ^(([A-G][0-5])|(PROFESOR))$ ]]; then
         read -p "Puesto no reconocido. ¿Seguro que quieres usar ${puesto}? (y/n): " confirm 
         if [[ $confirm != 'y' ]]; then
           puesto=""
@@ -93,7 +93,7 @@ done
 
 # Ask user to confirm detected names
 for name in "${possible_names[@]}"; do
-  if [[ $name =~ ^B[0-9][0-9]-[A-F][0-5]$ ]]; then
+  if [[ $name =~ ^B[0-9][0-9]-(([A-G][0-5])|(PROFESOR))$ ]]; then
     confirm_puesto "$name"
     if [[ $confirmed == 'y' ]]; then
       configure_host "$name"      
