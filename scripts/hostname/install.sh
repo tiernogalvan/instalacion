@@ -31,7 +31,7 @@ read_aula() {
 read_puesto() {
   puesto=""
   while [[ ! $puesto ]]; do
-    read -p "Indica el puesto (A1, A2... G4, G5): " puesto 
+    read -p "Indica el puesto (A1, A2... G4, G5, PROFESOR): " puesto 
     [[ $puesto ]] || continue
     puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]' | tr ' .' '__')
     if [[ ! $puesto =~ ^(([A-G][0-5])|(PROFESOR))$ ]]; then
