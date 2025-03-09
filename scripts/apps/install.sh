@@ -7,7 +7,7 @@
 dpkg --configure -a
 
 # Instalacion de paquetes basicos
-apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice fonts-opendyslexic nmap
+apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice fonts-opendyslexic nmap sshpass
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
@@ -55,7 +55,8 @@ fi
 
 # MongoDB Compass
 if [[ $(dpkg -l | grep mongodb-compass | wc -l) -eq 0 ]]; then
-  wget https://downloads.mongodb.com/compass/mongodb-compass_1.44.5_amd64.deb
+  sshpass -p 'Sandia4you' scp alumno@ftp.lan.tiernogalvan.es:/mnt/ftp/software/mongodb-compass_1.44.5_amd64.deb .
+  # wget https://downloads.mongodb.com/compass/mongodb-compass_1.44.5_amd64.deb
   apt install ./mongodb-compass_1.44.5_amd64.deb
 fi
 
@@ -80,7 +81,8 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
     apt install ./libdbusmenu-gtk4_16.04.1+18.10.20180917-0ubuntu8_amd64.deb ./libappindicator1_12.10.1+20.10.20200706.1-0ubuntu1_amd64.deb 
   fi
 
-  wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
+  # wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
+  sshpass -p 'Sandia4you' scp alumno@ftp.lan.tiernogalvan.es:/mnt/ftp/software/CiscoPacketTracer822_amd64_signed.deb .
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
