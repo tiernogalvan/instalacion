@@ -48,6 +48,7 @@ else
   run_install veyon
   run_install cron
   run_install wake-on-lan
+  run_install gnome-extensions
 
   apt install --fix-missing -y
   apt autoremove -y
