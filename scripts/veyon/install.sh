@@ -27,13 +27,12 @@ if [[ $(dpkg -l | grep veyon | wc -l) -eq 0 ]]; then
   chgrp $PROFESORES_GID /bin/veyon-cli
   chgrp $PROFESORES_GID /bin/veyon-master
   chgrp $PROFESORES_GID /bin/veyon-configurator
-
-  # Instalamos la clave pública de nuestro aula
-  aula=$(hostname | cut -d- -f1)  # Ej: B21-A1 queda en B21
-  aula_key="./keys/${aula}_public_key.pem"
-  if [[ -f $aula_key ]]; then
-    install -o root -g root -m 0444 -D $aula_key /etc/veyon/keys/public/${aula}/key
-  fi
-
 fi
 
+
+# Instalamos la clave pública de nuestro aula
+aula=$(hostname | cut -d- -f1)  # Ej: B21-A1 queda en B21
+aula_key="./keys/${aula}_public_key.pem"
+if [[ -f $aula_key ]]; then
+  install -o root -g root -m 0444 -D $aula_key /etc/veyon/keys/public/${aula}/key
+fi
