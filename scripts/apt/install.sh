@@ -3,6 +3,10 @@
 # Configuración de APT y herramientas básicas
 #
 
+# Creación de grupo docker, se hace antes de instalar nada para evitar que se ocupe el gid 999  
+# Se crea el grupo 999 para que coincida con el de ldap
+addgroup --gid 999 docker
+
 install -o root -g root -m 0644 -t /etc/apt/apt.conf.d/ -D 01proxy.conf
 install -o root -g root -m 0755 -t /usr/bin/ -D apt-proxy-detect.sh
 

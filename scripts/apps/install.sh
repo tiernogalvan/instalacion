@@ -44,12 +44,6 @@ if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
   # Se eliminan los grupos cacheados
   sss_cache -E
 
-  # Si existe algún grupo con el gid 999 que no sea docker, se lo cambiamos al gid 9999 
-  cat /etc/group | grep ':999:' | grep -v docker | awk -F : '{ print $1 }' | xargs -I {} groupmod -g 9999 {} 
-  
-  # Se crea el grupo 999 para que coincida con el de ldap
-  addgroup --gid 999 docker
-
   # Se arranca LDAP client
   systemctl start sssd
 
