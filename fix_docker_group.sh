@@ -10,7 +10,8 @@ if [[ $(cat /etc/group | grep docker | grep :600: | wc -l) -eq 0 ]]; then
 	sss_cache -E
 
 	# Se modifica el grupo para que tenga GID 600
-	groupmod -g 600 docker
+	groupdel -f docker
+	addgroup --gid 600 docker
 
 	# Se arranca LDAP client
 	systemctl start sssd
