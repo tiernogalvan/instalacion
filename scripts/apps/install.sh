@@ -62,6 +62,9 @@ if [[ $(dpkg -l | grep docker | wc -l) -eq 0 ]]; then
   # Se eliminan los grupos cacheados
   sss_cache -E
 
+  # Se crea el grupo 600 para que coincida con el de ldap
+  addgroup --gid 600 docker
+
   # Se arranca LDAP client
   systemctl start sssd
 
