@@ -7,7 +7,25 @@
 dpkg --configure -a
 
 # Instalacion de paquetes basicos
-apt-get install -y openjdk-21-jdk-headless mysql-client-8.0 maven net-tools terminator neovim ranger neofetch bat exa zsh mysql-client-8.0 postgresql-client libreoffice fonts-opendyslexic nmap sshpass
+PACKAGES="
+openjdk-21-jdk-headless
+mysql-client-8.0
+maven
+net-tools
+terminator
+neovim
+ranger
+neofetch
+bat
+zsh
+mysql-client-8.0
+postgresql-client
+libreoffice
+fonts-opendyslexic
+nmap
+sshpass
+"
+apt-get install -y $PACKAGES
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
