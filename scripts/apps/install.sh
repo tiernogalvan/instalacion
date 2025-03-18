@@ -100,7 +100,7 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   fi
 
   # wget https://cloud.educa.madrid.org/s/QFsJ9mX7c3iPk9D/download/CiscoPacketTracer822_amd64_signed.deb
-  sshpass -p 'Sandia4you' scp alumno@ftp.lan.tiernogalvan.es:/mnt/ftp/software/CiscoPacketTracer822_amd64_signed.deb .
+  sshpass -p 'Sandia4you' scp -o StrictHostKeyChecking=no alumno@ftp.lan.tiernogalvan.es:/mnt/ftp/software/CiscoPacketTracer822_amd64_signed.deb .
   mv CiscoPacketTracer822_amd64_signed.deb /tmp/
   CURRENT=$PWD
   cd /tmp/
