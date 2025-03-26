@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mv daemon.json /etc/docker/
+systemctl restart docker.service
+
 # MySQL
 PROXY="proxy-docker.tierno.es:5000/library/"
 function create_mysql() {
