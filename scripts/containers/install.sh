@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mv daemon.json /etc/docker/
+
+cp daemon.json /etc/docker/
 systemctl restart docker.service
 
 # MySQL
