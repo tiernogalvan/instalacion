@@ -5,7 +5,8 @@ cp daemon.json /etc/docker/
 systemctl restart docker.service
 
 # MySQL
-PROXY="proxy-docker.tierno.es:5000/library/"
+#PROXY="proxy-docker.tierno.es:5000/library/"
+PROXY=""
 function create_mysql() {
   container_name="$1"
   password="$2"
