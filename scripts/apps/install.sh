@@ -131,9 +131,9 @@ apt autoclean -y
 # SNAPS
 # Deshabilitado proxy de snap
 # snap unset system proxy.store
-#curl -sL http://proxy-snap.tierno.es/v2/auth/store/assertions | sudo snap ack /dev/stdin
-#snap set core proxy.store=ORN1WCXLAP87Hq6vwG6FTnMnZuivQUbA
-snap unset core proxy.store
+curl -sL http://proxy-snap.tierno.es/v2/auth/store/assertions | sudo snap ack /dev/stdin
+snap set core proxy.store=ORN1WCXLAP87Hq6vwG6FTnMnZuivQUbA
+#snap unset core proxy.store
 
 snap install eclipse --classic
 snap install sublime-text --classic
