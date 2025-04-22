@@ -24,6 +24,7 @@ libreoffice
 fonts-opendyslexic
 nmap
 sshpass
+gimp
 "
 apt-get install -y $PACKAGES
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
