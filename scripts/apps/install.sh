@@ -25,6 +25,8 @@ fonts-opendyslexic
 nmap
 sshpass
 gimp
+thunderbird
+simplescreenrecorder
 "
 apt-get install -y $PACKAGES
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
@@ -147,3 +149,4 @@ snap install drawio
 snap install --classic code
 snap install lsd
 snap install tldr
+snap install shotcut --classic
