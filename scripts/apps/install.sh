@@ -8,6 +8,7 @@ dpkg --configure -a
 
 # Instalacion de paquetes basicos
 PACKAGES="
+openssh-server
 openjdk-21-jdk-headless
 mysql-client-8.0
 maven
