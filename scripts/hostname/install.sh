@@ -34,7 +34,7 @@ read_puesto() {
     read -p "Indica el puesto (A1, A2... G4, G5, PROFESOR): " puesto 
     [[ $puesto ]] || continue
     puesto=$(echo $puesto | tr '[:lower:]' '[:upper:]' | tr ' .' '__')
-    if [[ ! $puesto =~ ^(([A-G][0-5])|(PROFESOR))$ ]]; then
+    if [[ ! $puesto =~ ^(([A-J][0-7])|(PROFESOR))$ ]]; then
         read -p "Puesto no reconocido. ¿Seguro que quieres usar ${puesto}? (y/n): " confirm 
         if [[ $confirm != 'y' ]]; then
           puesto=""
