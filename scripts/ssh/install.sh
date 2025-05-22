@@ -5,6 +5,6 @@ install -o root -g root -m 0600 -t /root/.ssh/ -D authorized_keys
 install -o root -g root -m 0600 -t /etc/ssh/sshd_config.d/ -D sshd_tierno.conf
 
 # Por algún motivo es necesario reinstalar en ubuntu 24
-apt install --reconfigure openssh-server
+apt install --reinstall openssh-server
 systemctl enable sshd.service
 systemctl restart sshd.service
