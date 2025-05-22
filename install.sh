@@ -39,6 +39,7 @@ else
 
   run_install apt
   run_install ssh
+  run_install certs
   run_install ldap
   run_install auth # Después de ldap
   run_install bash
