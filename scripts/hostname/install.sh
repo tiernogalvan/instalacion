@@ -67,7 +67,7 @@ configure_host() {
   devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}' | sort | uniq)
   for dev in $devs ; do
     mac=$(cat /sys/class/net/${dev}/address)
-    url="https://lan.tiernogalvan.es/hostname/${hostname}/${mac}"
+    url="https://tierno.es/hostname/${hostname}/${mac}"
     echo "Sending $url"
     wget -q -O /dev/null "$url"
   done
