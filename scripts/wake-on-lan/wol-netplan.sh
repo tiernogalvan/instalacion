@@ -11,7 +11,7 @@ if [ ${#connection_list[@]} -eq 0 ]; then
 fi
 
 for connection in "${connection_list[@]}"; do
-  interface=(nmcli -t -f connection.interface-name connection show "$connection" | awk -F: '{print $2}')
+  interface=$(nmcli -t -f connection.interface-name connection show "$connection" | awk -F: '{print $2}')
   if nmcli connection modify "$connection" 802-3-ethernet.wake-on-lan magic; then
     echo "Wake-on-LAN activado para $interface - $connection."
   else
