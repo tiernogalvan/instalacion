@@ -28,4 +28,4 @@ for interface in $interfaces; do
   else
     echo "Failed to enable Wake-on-LAN for $interface"
   fi
-doneone
+done
