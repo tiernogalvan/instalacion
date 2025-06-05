@@ -25,3 +25,6 @@ done
 # Para verificar WOL activado:
 # nmcli connection show <connection_name> | grep wake-on-lan"
 # ethtool enp2s0
+# Debe mostrar 'g':
+#   Supports Wake-on: g
+#   Wake-on: g
