@@ -13,3 +13,6 @@ fi
 apt install --reinstall openssh-server
 systemctl enable ssh.service
 systemctl restart ssh.service
+
+# UFW debería estar desactivado, pero por si acaso habilitamos ssh
+ufw allow ssh
