@@ -40,6 +40,7 @@ else
   run_install apt
   run_install ssh
   run_install certs
+  run_install gnome-extensions # Mejor antes de ldap
   run_install ldap
   run_install auth # Después de ldap
   run_install bash
@@ -49,7 +50,6 @@ else
   run_install veyon
   run_install cron
   run_install wake-on-lan
-  run_install gnome-extensions
 
   apt install --fix-missing -y
   apt autoremove -y
