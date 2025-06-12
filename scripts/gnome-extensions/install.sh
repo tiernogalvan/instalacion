@@ -3,4 +3,4 @@
 #
 
 script='https://raw.githubusercontent.com/tiernogalvan/gnome-extension-tierno-host-info/refs/heads/main/install-system.sh'
-curl -L $script | bash
+curl -sL $script | bash
