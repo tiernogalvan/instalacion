@@ -149,6 +149,7 @@ insert_step apt
 insert_step ssh
 insert_step certs
 insert_step gnome-extensions # Mejor antes de ldap
+insert_step local-users
 insert_step ldap
 insert_step auth # Después de ldap
 insert_step bash

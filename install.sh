@@ -41,6 +41,7 @@ else
   run_install ssh
   run_install certs
   run_install gnome-extensions # Mejor antes de ldap
+  run_install local-users
   run_install ldap
   run_install auth # Después de ldap
   run_install bash
