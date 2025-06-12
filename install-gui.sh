@@ -70,7 +70,7 @@ run_install_steps_zenity() {
 
     if [[ $(pidof zenity) ]]; then
       progress=$(bc -l <<< "$progress + $increment")
-      printf "%.0f\n" "$progress" >&3
+      echo "scale=0; $progress/1" | bc >&3
     fi
   done
 
