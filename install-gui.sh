@@ -20,7 +20,7 @@ declare -a exit_codes=()
 ###########################################################
 
 rootpath="$(pwd)"
-run_actual_step_logic() {
+install_step() {
   # Use absolute path in case some script changed directory
   cd ${rootpath}/scripts/$1
   bash ./install.sh
@@ -65,7 +65,7 @@ run_install_steps_zenity() {
       echo "# Ejecutando paso $((i+1)) de $num_steps: $step_name" >&3
     fi
 
-    run_actual_step_logic "$step_name"
+    install_step "$step_name"
     exit_codes+=($?)
 
     if [[ $(pidof zenity) ]]; then
@@ -84,7 +84,7 @@ run_install_steps_zenity() {
 
 run_install_steps_console() {
     for i in "${!STEPS[@]}"; do
-      run_actual_step_logic "$step_name"
+      install_step "$step_name"
       exit_codes+=($?)
     done
 }
@@ -141,7 +141,7 @@ if [[ ${SUDO_USER} != "administrator" ]]; then
   exit -1
 fi
 
-insert_step hostname  # Must be first
+install_step hostname  # Must be first
 echo "Comenzando instalación..."
 echo
 
