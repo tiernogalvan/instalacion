@@ -46,7 +46,7 @@ run_install_steps_zenity() {
   zenity --progress \
     --title="Instalación de plataforma" \
     --text="Iniciando..." \
-    --percentage=0 \
+    --percentage=2 \
     --width=450 \
     --auto-close \
     --auto-kill < "$PIPE_NAME" &
@@ -147,8 +147,8 @@ echo
 
 insert_step apt
 insert_step ssh
-insert_step certs
 insert_step gnome-extensions # Mejor antes de ldap
+insert_step certs
 insert_step local-users
 insert_step ldap
 insert_step auth # Después de ldap
