@@ -42,7 +42,8 @@ inicializar_usuario() {
 
 inicializar_usuario diurno
 inicializar_usuario vespertino
-
-
+# Se iniciliza administrator porque en el scritp loca-users se
+# deshabilita el password local de administrator
+inicializar_usuario administrator
 
 # Conviene reiniciar sesión
