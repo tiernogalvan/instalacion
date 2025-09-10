@@ -16,7 +16,7 @@ function create_mysql() {
 
     # MySQL 8.0 ignora los CHECK al crear tablas
     # MySQL 8.1 ya no soporta passwords normales por defecto, hay que pasarle el parámetro siguiente.
-    docker run --name $container_name -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d ${PROXY}mysql:8.1 mysqld --default-authentication-plugin=mysql_native_password
+    docker run --name $container_name -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d ${PROXY}mysql:8.1 mysqld --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
     docker stop $container_name
   fi
 }
