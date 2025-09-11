@@ -22,6 +22,7 @@ zsh
 mysql-client-8.0
 postgresql-client
 libreoffice
+libreoffice-l10n-es
 fonts-opendyslexic
 nmap
 sshpass
