@@ -146,7 +146,6 @@ echo "Comenzando instalación..."
 echo
 
 insert_step apt
-insert_step ssh
 insert_step gnome-extensions # Mejor antes de ldap
 insert_step certs
 insert_step local-users
@@ -159,6 +158,8 @@ insert_step containers
 insert_step veyon
 insert_step cron
 insert_step wake-on-lan
+insert_step ssh
+
 
 run_install_steps
 
