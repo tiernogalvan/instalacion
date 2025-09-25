@@ -6,6 +6,8 @@
 # Arregla paquetes que puedan estar en mal estado
 dpkg --configure -a
 
+echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean true" | sudo debconf-set-selections
+
 # Instalacion de paquetes basicos
 PACKAGES="
 openssh-server
@@ -29,6 +31,7 @@ sshpass
 gimp
 thunderbird
 simplescreenrecorder
+ttf-mscorefonts-installer
 "
 apt-get install -y $PACKAGES
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
