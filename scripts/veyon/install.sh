@@ -53,3 +53,6 @@ aula_key="./keys/${aula}_public_key.pem"
 if [[ -f $aula_key ]]; then
   install -o root -g root -m 0444 -D $aula_key /etc/veyon/keys/public/${aula}/key
 fi
+
+# Instala un watchdog para reiniciar veyon si se cuelga o arranca demasiado pronto
+bash install_veyon_watchdog.sh
