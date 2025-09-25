@@ -29,6 +29,23 @@ if [[ $(dpkg -l | grep veyon | wc -l) -eq 0 ]]; then
   chgrp $PROFESORES_GID /bin/veyon-configurator
 fi
 
+bash -c 'set -e; d=/etc/systemd/system/veyon.service.d; f=$d/override.conf; mkdir -p "$d"; cat >"$f" <<EOF
+[Unit]
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Restart=always
+RestartSec=5s
+EOF
+systemctl daemon-reload
+systemctl try-restart veyon.service
+systemctl enable veyon.service >/dev/null
+systemctl list-unit-files | grep -q "^NetworkManager-wait-online.service" && systemctl enable NetworkManager-wait-online.service >/dev/null || true
+systemctl list-unit-files | grep -q "^systemd-networkd-wait-online.service" && systemctl enable systemd-networkd-wait-online.service >/dev/null || true
+'
+
+
 
 # Instalamos la clave pública de nuestro aula
 aula=$(hostname | cut -d- -f1)  # Ej: B21-A1 queda en B21
