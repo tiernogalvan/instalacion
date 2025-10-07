@@ -28,6 +28,8 @@ libreoffice-l10n-es
 fonts-opendyslexic
 nmap
 sshpass
+php-mysql
+filezilla
 gimp
 thunderbird
 simplescreenrecorder
