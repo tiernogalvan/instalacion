@@ -7,8 +7,8 @@
 
 source ../functions.sh
 
-ensure_line_in_file /etc/security/time.conf diurno     '* ; * ; diurno     ; Al0800-1500'
-ensure_line_in_file /etc/security/time.conf vespertino '* ; * ; vespertino ; Al1500-2200'
+ensure_line_in_file /etc/security/time.conf diurno     '* ; * ; diurno     ; Al0800-1530'
+ensure_line_in_file /etc/security/time.conf vespertino '* ; * ; vespertino ; Al1430-2200'
 
 # Aquí activamos pam_time.
 # En caso login denegado ejecutamos tierno_pam_time_denied.sh para mostrar mensaje de error personalizado.
