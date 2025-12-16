@@ -151,6 +151,7 @@ insert_step certs
 insert_step local-users
 insert_step ldap
 insert_step auth # Después de ldap
+insert_step dhcp
 insert_step bash
 insert_step resolve
 insert_step apps
