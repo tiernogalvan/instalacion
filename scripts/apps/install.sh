@@ -148,7 +148,7 @@ snap set core proxy.store=ORN1WCXLAP87Hq6vwG6FTnMnZuivQUbA
 snap install eclipse --classic
 snap install sublime-text --classic
 snap install android-studio --classic
-snap install intellij-idea-community --classic
+snap install intellij-idea --classic
 snap install mysql-workbench-community
 snap install dbeaver-ce
 snap install postman
