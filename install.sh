@@ -136,8 +136,9 @@ echo
 
 
 if [[ ${SUDO_USER} != "administrator" ]]; then
-  echo "Este script debe ejecutarse con el usuario administrator (usuario actual $SUDO_USER)"
-  echo "Si durante la instalación de Ubuntu se crea un usuario erróneo, sigue las instrucciones del punto Arreglar nombre del usuario administrator del README de este repositorio"
+  >&2 echo -e "\033[31m LA INSTALACIÓN NO SE HA REALIZADO \033[0m "
+  >&2 echo -e "\033[31m Este script debe ejecutarse con el usuario administrator (usuario actual $SUDO_USER) \033[0m "
+  >&2 echo "Si durante la instalación de Ubuntu se crea un usuario erróneo, sigue las instrucciones del punto Arreglar nombre del usuario administrator del README de este repositorio"
   exit -1
 fi
 
