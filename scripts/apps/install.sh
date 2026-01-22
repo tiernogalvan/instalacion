@@ -28,7 +28,6 @@ libreoffice-l10n-es
 fonts-opendyslexic
 nmap
 sshpass
-php-mysql
 filezilla
 gimp
 thunderbird
@@ -41,8 +40,7 @@ apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
 apt-get upgrade -y
 
 # PHP
-apt-get install php libapache2-mod-php php-pear php-dev -y
-pecl install xdebug
+apt-get install -y php libapache2-mod-php php-pear php-dev php-mysql php-xdebug
 
 # NodeJS
 if [[ $(dpkg -l | grep nodejs | wc -l) -eq 0 ]]; then
