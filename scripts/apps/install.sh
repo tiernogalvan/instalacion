@@ -82,7 +82,7 @@ fi
 
 # MongoDB Compass
 if [[ $(dpkg -l | grep mongodb-compass | wc -l) -eq 0 ]]; then
-  sshpass -p 'Sandia4you' scp alumno@ftp.lan.tierno.es:/mnt/ftp/software/mongodb-compass_1.44.5_amd64.deb .
+  sshpass -p 'Sandia4you' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null alumno@ftp.lan.tierno.es:/mnt/ftp/software/mongodb-compass_1.44.5_amd64.deb .
   # wget https://downloads.mongodb.com/compass/mongodb-compass_1.44.5_amd64.deb
   apt install ./mongodb-compass_1.44.5_amd64.deb
 fi
