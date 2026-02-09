@@ -43,5 +43,5 @@ for ip in "${servers[@]}"; do
 done
 
 log "Fallback to direct apt download (no proxy)"
-timeout $timeout wget -q https://lan.tiernogalvan.es/msg/apt-proxy-fallback-direct
+timeout $timeout wget -q https://lan.tierno.es/msg/apt-proxy-fallback-direct
 printf "DIRECT"
