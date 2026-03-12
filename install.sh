@@ -201,10 +201,10 @@ print_final_report
 
 if [[ "$SHUTDOWN_MODE" == "shutdown" ]]; then
   echo "Apagando..."
-  shutdown -h now
+  shutdown -h +1
 elif [[ "$SHUTDOWN_MODE" == "reboot" ]]; then
   echo "Reiniciando..."
-  reboot
+  shutdown -r +1
 else
   echo "Reinicia el sistema."
 fi
