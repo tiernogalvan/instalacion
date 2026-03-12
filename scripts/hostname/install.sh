@@ -4,6 +4,18 @@
 # Envía los datos al servidor junto a la MAC del equipo.
 #
 
+###########################################################
+# Parseo de argumentos
+###########################################################
+
+AUTO_YES="${AUTO_YES:-0}"
+
+for arg in "$@"; do
+  case "$arg" in
+    -y) AUTO_YES=1 ;;
+  esac
+done
+
 # Sets variable aula
 read_aula() {
   aula=""
@@ -91,21 +103,33 @@ for lookup in "${lookup_list[@]}"; do
   add_possible "$name"
 done
 
-# Ask user to confirm detected names
+# Check detected names
+host_configured=0
 for name in "${possible_names[@]}"; do
-  if [[ $name =~ ^B[0-9][0-9]-(([A-G][0-5])|(PROFESOR))$ ]]; then
-    confirm_puesto "$name"
-    if [[ $confirmed == 'y' ]]; then
-      configure_host "$name"      
-      exit
+  if [[ $host_configured -eq 0 && $name =~ ^B[0-9][0-9]-(([A-G][0-5])|(PROFESOR))$ ]]; then
+    if [[ "$AUTO_YES" -eq 1 ]]; then
+      echo "Hostname válido detectado: $name. Omitiendo configure_host (-y)."
+      host_configured=1
+    else
+      confirm_puesto "$name"
+      if [[ $confirmed == 'y' ]]; then
+        configure_host "$name"
+        host_configured=1
+      fi
     fi
   fi
 done
 
-echo
-echo "Configuración manual:"
-read_aula
-read_puesto
-host="${aula}-${puesto}"
-configure_host "$host"
-
+# No se encontró un hostname válido: configure_host es obligatorio
+# independientemente del parámetro -y
+if [[ $host_configured -eq 0 ]]; then
+  echo
+  if [[ "$AUTO_YES" -eq 1 ]]; then
+    echo "AVISO: No se detectó un hostname válido. Se requiere configuración manual aunque se haya pasado -y."
+  fi
+  echo "Configuración manual:"
+  read_aula
+  read_puesto
+  host="${aula}-${puesto}"
+  configure_host "$host"
+fi

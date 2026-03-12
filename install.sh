@@ -14,6 +14,24 @@ fi
 declare -a STEPS
 declare -a exit_codes=()
 
+###########################################################
+# Parseo de argumentos
+###########################################################
+
+AUTO_YES=0
+SHUTDOWN_MODE=""
+
+for arg in "$@"; do
+  case "$arg" in
+    -y) AUTO_YES=1 ;;
+    -s) SHUTDOWN_MODE="shutdown" ;;
+    -r) SHUTDOWN_MODE="reboot" ;;
+    *) die "Parámetro desconocido: $arg. Uso: $0 [-y] [-s|-r]" ;;
+  esac
+done
+
+export AUTO_YES
+
 
 ###########################################################
 # Declaración de funciones
@@ -24,6 +42,15 @@ install_step() {
   # Use absolute path in case some script changed directory
   cd ${rootpath}/scripts/$1
   bash ./install.sh
+}
+
+install_step_hostname() {
+  cd ${rootpath}/scripts/hostname
+  if [[ "$AUTO_YES" -eq 1 ]]; then
+    bash ./install.sh -y
+  else
+    bash ./install.sh
+  fi
 }
 
 insert_step() {
@@ -142,7 +169,7 @@ if [[ ${SUDO_USER} != "administrator" ]]; then
   exit -1
 fi
 
-install_step hostname  # Must be first
+install_step_hostname  # Must be first
 echo "Comenzando instalación..."
 echo
 
@@ -172,12 +199,12 @@ apt autoclean -y
 print_final_report
 [[ $? -ne 0 ]] && die "Hubo errores en la instalación."
 
-if [[ $1 == "-s" ]]; then
+if [[ "$SHUTDOWN_MODE" == "shutdown" ]]; then
   echo "Apagando..."
   shutdown -h now
-elif [[ $1 == "-r" ]]; then
+elif [[ "$SHUTDOWN_MODE" == "reboot" ]]; then
   echo "Reiniciando..."
   reboot
-else 
+else
   echo "Reinicia el sistema."
 fi
