@@ -20,17 +20,21 @@ declare -a exit_codes=()
 
 AUTO_YES=0
 SHUTDOWN_MODE=""
+HOSTNAME_PARAM=""
 
-for arg in "$@"; do
-  case "$arg" in
-    -y) AUTO_YES=1 ;;
-    -s) SHUTDOWN_MODE="shutdown" ;;
-    -r) SHUTDOWN_MODE="reboot" ;;
-    *) die "Parámetro desconocido: $arg. Uso: $0 [-y] [-s|-r]" ;;
+while getopts "ysrh:" opt; do 
+  case "$opt" in
+    y) AUTO_YES=1 ;;
+    s) SHUTDOWN_MODE="shutdown" ;;
+    r) SHUTDOWN_MODE="reboot" ;;
+    h) HOSTNAME_PARAM="$OPTARG" ;;
+    *) die "Parámetro desconocido. Uso: $0 [-y] [-s|-r] [-h hostname]" ;;
   esac
 done
 
 export AUTO_YES
+export HOSTNAME_PARAM
+
 
 
 ###########################################################
@@ -44,13 +48,13 @@ install_step() {
   bash ./install.sh
 }
 
+
 install_step_hostname() {
   cd ${rootpath}/scripts/hostname
-  if [[ "$AUTO_YES" -eq 1 ]]; then
-    bash ./install.sh -y
-  else
-    bash ./install.sh
-  fi
+  local args=""
+  [[ "$AUTO_YES" -eq 1 ]] && args="$args -y"
+  [[ -n "$HOSTNAME_PARAM" ]] && args="$args -h $HOSTNAME_PARAM"   # ← nuevo
+  bash ./install.sh $args
 }
 
 insert_step() {

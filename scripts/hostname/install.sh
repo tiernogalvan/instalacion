@@ -3,16 +3,16 @@
 # Establece el hostname.
 # Envía los datos al servidor junto a la MAC del equipo.
 #
-
 ###########################################################
 # Parseo de argumentos
 ###########################################################
-
 AUTO_YES="${AUTO_YES:-0}"
+HOSTNAME_PARAM=""
 
-for arg in "$@"; do
-  case "$arg" in
-    -y) AUTO_YES=1 ;;
+while getopts "yh:" opt; do
+  case "$opt" in
+    y) AUTO_YES=1 ;;
+    h) HOSTNAME_PARAM="$OPTARG" ;;
   esac
 done
 
@@ -20,7 +20,6 @@ done
 read_aula() {
   aula=""
   while [[ ! $aula ]]; do
-    # Forcing the read from tty allows this script to be run from a pipe
     read -p "Indica el aula (B15, B17, B21, B22...): " aula 
     [[ $aula ]] || continue
     aula=$(echo $aula | tr '[:lower:]' '[:upper:]')
@@ -75,7 +74,6 @@ configure_host() {
   hostname="$1"
   echo "Setting hostname $hostname"
   hostnamectl hostname $hostname
-  # Send the mac address
   devs=$(ip route show default | awk '/default via [0-9\.]* dev/ {print $5}' | sort | uniq)
   for dev in $devs ; do
     mac=$(cat /sys/class/net/${dev}/address)
@@ -85,6 +83,13 @@ configure_host() {
   done
 }
 
+# Si se pasó -h, establecer hostname directamente sin preguntar
+if [[ -n "$HOSTNAME_PARAM" ]]; then
+  echo "Hostname recibido por parámetro: $HOSTNAME_PARAM"
+  configure_host "$HOSTNAME_PARAM"
+  exit 0
+fi
+
 # Array of possible names to check
 possible_names=()
 add_possible() {
@@ -92,7 +97,6 @@ add_possible() {
     possible_names+=($1)
   fi
 }
-
 add_possible "$(hostname)"
 
 # Add all reverse lookups for the main IP address
@@ -121,7 +125,6 @@ for name in "${possible_names[@]}"; do
 done
 
 # No se encontró un hostname válido: configure_host es obligatorio
-# independientemente del parámetro -y
 if [[ $host_configured -eq 0 ]]; then
   echo
   if [[ "$AUTO_YES" -eq 1 ]]; then
