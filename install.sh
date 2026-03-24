@@ -192,6 +192,7 @@ insert_step veyon
 insert_step cron
 insert_step wake-on-lan
 insert_step ssh
+insert_step inventory
 
 
 run_install_steps

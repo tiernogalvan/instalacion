@@ -87,17 +87,6 @@ if [[ $(dpkg -l | grep mongodb-compass | wc -l) -eq 0 ]]; then
   apt install ./mongodb-compass_1.44.5_amd64.deb
 fi
 
-# CHROME
-if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
-  chromegpg="/usr/share/keyrings/google-chrome.gpg"
-  curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
-  echo deb [arch=amd64 signed-by=${chromegpg}] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
-  apt update
-  apt install google-chrome-stable
-  # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  # apt install ./google-chrome*.deb -y
-fi
-
 # Packet Tracer
 if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   # Instala libappindicator1 en Ubuntu 24.04, esta libreria es necesaria para PacketTracer
