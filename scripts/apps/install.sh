@@ -140,6 +140,7 @@ snap install android-studio --classic
 snap remove intellij-idea-community
 snap install intellij-idea --classic
 snap install mysql-workbench-community
+snap install powershell --classic
 snap install dbeaver-ce
 snap install postman
 snap install drawio
