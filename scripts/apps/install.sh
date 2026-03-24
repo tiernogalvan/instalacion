@@ -30,6 +30,7 @@ nmap
 sshpass
 filezilla
 gimp
+vlc
 thunderbird
 simplescreenrecorder
 ttf-mscorefonts-installer
