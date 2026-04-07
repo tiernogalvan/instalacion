@@ -144,7 +144,7 @@ snap remove intellij-idea-community
 snap install intellij-idea --classic
 snap install mysql-workbench-community
 snap install powershell --classic
-snap install dbeaver-ce
+snap install dbeaver-ce --classic
 snap install postman
 snap install drawio
 snap install --classic code
