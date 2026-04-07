@@ -135,6 +135,7 @@ snap set core store.url=http://snap-cache.lan.tierno.es
 systemctl restart snapd
 #snap unset core proxy.store
 
+snap install firefox --classic
 snap install eclipse --classic
 snap install sublime-text --classic
 snap install android-studio --classic
