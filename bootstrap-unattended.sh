@@ -27,10 +27,10 @@ cd instalacion-main
 
 # Ejecutar install.sh con o sin hostname
 if [[ -n "$HOSTNAME_PARAM" ]]; then
-  if [[ -e /dev/tty ]]; then
-    time bash ./install.sh -y -h "$HOSTNAME_PARAM" < /dev/tty > /dev/tty
-  else
+  if [[ -n "$HOSTNAME_PARAM" ]]; then
     time bash ./install.sh -y -h "$HOSTNAME_PARAM"
+  else
+    time bash ./install.sh -y
   fi
 else
   if [[ -e /dev/tty ]]; then
