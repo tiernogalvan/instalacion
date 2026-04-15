@@ -3,7 +3,7 @@
 source ../functions.sh
 
 
-if [[ $(dpkg -l | grep veyon | wc -l) -eq 0 ]]; then
+if ! dpkg -s veyon &>/dev/null; then
   # IMPRESCINDIBLE:
   # Deshabilita Wayland para arrancar en Xorg. Necesario reiniciar
   # Para comprobarlo: `echo $XDG_SESSION_TYPE` debe poner x11, no wayland
