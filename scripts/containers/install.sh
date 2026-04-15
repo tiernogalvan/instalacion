@@ -12,12 +12,11 @@ function create_mysql() {
   password="$2"
   if [[ ! $(docker ps --all | grep $container_name) ]]; then
     # Este comando lanza un contenedor con MySQL llamado diurno-mysql, la clave de root es Sandia4you
-    # docker run --name diurno-mysql -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d mysql:8.0.0
+    # docker create --name diurno-mysql -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d mysql:8.0.0
 
     # MySQL 8.0 ignora los CHECK al crear tablas
     # MySQL 8.1 ya no soporta passwords normales por defecto, hay que pasarle el parámetro siguiente.
-    docker run --name $container_name -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d ${PROXY}mysql:8.1 mysqld --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
-    docker stop $container_name
+    docker create --name $container_name -e MYSQL_ROOT_PASSWORD=$password -p 3306:3306 -d ${PROXY}mysql:8.1 mysqld --default-authentication-plugin=mysql_native_password --bind-address=0.0.0.0
   fi
 }
 
@@ -30,8 +29,7 @@ function create_postgress() {
   container_name="$1"
   password="$2"
   if [[ ! $(docker ps --all | grep $container_name) ]]; then
-    docker run --name $container_name -e POSTGRES_PASSWORD=$password -p 5432:5432  -d ${PROXY}postgres:14.0
-    docker stop $container_name
+    docker create --name $container_name -e POSTGRES_PASSWORD=$password -p 5432:5432  -d ${PROXY}postgres:14.0
   fi
 }
 
@@ -45,8 +43,7 @@ function create_mongo() {
   container_name="$1"
   password="$2"
   if [[ ! $(docker ps --all | grep $container_name) ]]; then
-    docker run --name $container_name -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=$password -p 27017:27017 -d ${PROXY}mongo:8.0.3
-    docker stop $container_name
+    docker create --name $container_name -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=$password -p 27017:27017 -d ${PROXY}mongo:8.0.3
   fi
 }
 
