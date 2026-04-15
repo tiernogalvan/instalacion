@@ -37,7 +37,7 @@ ttf-mscorefonts-installer
 composer
 "
 apt-get install -y $PACKAGES
-apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku thunderbird
+apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku
 apt-get upgrade -y
 
 # PHP
