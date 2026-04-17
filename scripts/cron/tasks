@@ -1,1 +1,2 @@
-00 22 * * * shutdown -h now
+00 22 * * * /sbin/shutdown -h now
+00 09 * * * /usr/bin/ocsinventory-agent
