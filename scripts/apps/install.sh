@@ -130,8 +130,8 @@ apt autoclean -y
 # SNAPS
 # Deshabilitado proxy de snap
 # snap unset system proxy.store
+curl -sL http://snap-cache.lan.tierno.es/v2/auth/store/assertions | sudo snap ack /dev/stdin
 snap set core proxy.store=9M8lW8lbo5iMBdv6BcZNGIgvl2UhNS48
-snap set core store.url=http://snap-cache.lan.tierno.es
 systemctl restart snapd
 #snap unset core proxy.store
 
