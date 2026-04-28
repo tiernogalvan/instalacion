@@ -189,10 +189,11 @@ insert_step resolve
 insert_step apps
 insert_step containers
 insert_step veyon
+insert_step inventory
 insert_step cron
 insert_step wake-on-lan
 insert_step ssh
-insert_step inventory
+
 
 
 run_install_steps
