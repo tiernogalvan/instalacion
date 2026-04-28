@@ -139,8 +139,6 @@ snap install firefox --classic
 snap install eclipse --classic
 snap install sublime-text --classic
 snap install android-studio --classic
-# La siguiente linea hay que emininarla en el curso 26/27
-snap remove intellij-idea-community
 snap install intellij-idea --classic
 snap install mysql-workbench-community
 snap install powershell --classic
