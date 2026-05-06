@@ -127,6 +127,16 @@ fi
 apt autoremove -y
 apt autoclean -y
 
+# NVIDIA Driver para la dotacion de pc nuevos (2026)
+if lspci | grep -qi nvidia; then
+  if [[ $(dpkg -l | grep nvidia-driver | wc -l) -eq 0 ]]; then
+    echo "GPU NVIDIA detectada, instalando driver..."
+    apt install -y nvidia-driver-570
+  else
+    echo "Driver NVIDIA ya instalado, omitiendo."
+  fi
+fi
+
 # SNAPS
 # Deshabilitado proxy de snap
 # snap unset system proxy.store
