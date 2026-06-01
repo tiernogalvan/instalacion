@@ -143,7 +143,7 @@ fi
 #curl -sL http://snap-cache.lan.tierno.es/v2/auth/store/assertions | sudo snap ack /dev/stdin
 #snap set core proxy.store=9M8lW8lbo5iMBdv6BcZNGIgvl2UhNS48
 #systemctl restart snapd
-#snap unset core proxy.store
+snap unset core proxy.store
 
 snap install firefox --classic
 snap install eclipse --classic
