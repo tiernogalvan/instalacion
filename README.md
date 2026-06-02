@@ -27,3 +27,5 @@ sudo bash ./install.sh
 ```bash
 wget -qO- https://raw.githubusercontent.com/tiernogalvan/instalacion/main/fix_docker_group.sh | sudo bash
 ```
+
+# [Documentación](DOCUMENTATION.md)
