@@ -109,6 +109,17 @@ if [[ $(dpkg -l | grep packettracer | wc -l) -eq 0 ]]; then
   cd $CURRENT
 fi
 
+# CHROME
+if [[ $(dpkg -l | grep google-chrome-stable | wc -l) -eq 0 ]]; then
+  chromegpg="/usr/share/keyrings/google-chrome.gpg"
+  curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | tee ${chromegpg} > /dev/null
+  echo deb [arch=amd64 signed-by=${chromegpg}] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  apt update
+  apt install google-chrome-stable
+  # wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  # apt install ./google-chrome*.deb -y
+fi
+
 # VirtualBox 7
 if [[ $(dpkg -l | grep virtualbox-7.1 | wc -l) -eq 0 ]]; then
 
