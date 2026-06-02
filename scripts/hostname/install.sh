@@ -110,7 +110,7 @@ done
 # Check detected names
 host_configured=0
 for name in "${possible_names[@]}"; do
-  if [[ $host_configured -eq 0 && $name =~ ^B[0-9][0-9]-(([A-H][0-5])|(PROFESOR))$ ]]; then
+  if [[ $host_configured -eq 0 && $name =~ ^B[0-9][0-9]-(([A-J][0-7])|(PROFESOR))$ ]]; then
     if [[ "$AUTO_YES" -eq 1 ]]; then
       echo "Hostname válido detectado: $name. Omitiendo configure_host (-y)."
       host_configured=1
