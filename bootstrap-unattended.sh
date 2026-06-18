@@ -5,6 +5,11 @@ if [[ "$EUID" -ne 0 ]]; then
   die "Please run as root"
 fi
 
+# Log a fichero + pantalla
+LOG=/var/log/instalacion.log
+exec > >(tee -a "$LOG") 2>&1
+echo "=== Instalación iniciada: $(date) ==="
+
 # Parsear parámetro opcional -h
 HOSTNAME_PARAM=""
 while getopts "h:" opt; do
@@ -45,4 +50,4 @@ rm -f /root/main.zip
 rm -rf /root/instalacion-main
 echo "Fin de la instalación :)"
 
-shutdown -r now
+shutdown -h now
