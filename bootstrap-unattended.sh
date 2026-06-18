@@ -44,3 +44,5 @@ fi
 rm -f /root/main.zip
 rm -rf /root/instalacion-main
 echo "Fin de la instalación :)"
+
+shutdown -r now
