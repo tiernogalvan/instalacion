@@ -151,8 +151,11 @@ fi
 # SNAPS
 # Deshabilitado proxy de snap
 # snap unset system proxy.store
-curl -sL http://snap-cache.lan.tierno.es/v2/auth/store/assertions | sudo snap ack /dev/stdin
-snap set core proxy.store=sv8b9kxCjWRy4wwhAVDZe2xuzX9CNg5o
+# snap unset core proxy.store
+
+sudo curl -sL http://snap-cache.lan.tierno.es/v2/auth/store/assertions -o /tmp/store.assert
+sudo snap ack /tmp/store.assert
+snap set system proxy.store=sv8b9kxCjWRy4wwhAVDZe2xuzX9CNg5o
 systemctl restart snapd
 
 snap install firefox --classic
