@@ -149,14 +149,9 @@ if lspci | grep -qi nvidia; then
 fi
 
 # SNAPS
-# Deshabilitado proxy de snap
-# snap unset system proxy.store
-# snap unset core proxy.store
-
-sudo curl -sL http://snap-cache.lan.tierno.es/v2/auth/store/assertions -o /tmp/store.assert
-sudo snap ack /tmp/store.assert
-snap set system proxy.store=sv8b9kxCjWRy4wwhAVDZe2xuzX9CNg5o
-systemctl restart snapd
+# Deshabilitado proxy de snap (limitación de 25 en el free tier)
+snap unset system proxy.store
+snap unset core proxy.store
 
 snap install firefox --classic
 snap install eclipse --classic
