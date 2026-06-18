@@ -24,6 +24,7 @@ fi
 # Comprobar si ya está instalado
 if dpkg -l ocsinventory-agent &>/dev/null; then
     echo "OCS Inventory Agent ya está instalado. Se procede a reinventariar el equipo."
+    ocsinventory-agent
     exit 0
 fi
 
