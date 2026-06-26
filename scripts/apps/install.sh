@@ -142,7 +142,7 @@ apt autoclean -y
 if lspci | grep -qi nvidia; then
   if [[ $(dpkg -l | grep nvidia-driver | wc -l) -eq 0 ]]; then
     echo "GPU NVIDIA detectada, instalando driver..."
-    apt install -y nvidia-driver-570
+    ubuntu-drivers install
   else
     echo "Driver NVIDIA ya instalado, omitiendo."
   fi
