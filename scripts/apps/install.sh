@@ -10,6 +10,7 @@ echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean 
 
 # Instalacion de paquetes basicos
 PACKAGES="
+curl
 openssh-server
 openjdk-21-jdk-headless
 mysql-client-8.0
