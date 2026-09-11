@@ -15,6 +15,7 @@ openssh-server
 openjdk-21-jdk-headless
 mysql-client-8.0
 maven
+arduino
 net-tools
 terminator
 neovim
