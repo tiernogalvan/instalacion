@@ -37,6 +37,7 @@ thunderbird
 simplescreenrecorder
 ttf-mscorefonts-installer
 composer
+hunspell-es
 "
 apt-get install -y $PACKAGES
 apt-get purge -y aisleriot gnome-mahjongg gnome-mines gnome-sudoku apache2
